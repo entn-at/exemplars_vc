@@ -1,0 +1,19 @@
+[PATH]
+
+RootPath = .
+DataPath = data/
+
+[VAR]
+
+src = SF1
+tar = TF1
+sr = 16000
+feature_path = data/vc
+
+[NET]
+in_size = 20
+hidden_size = 20
+out_size = 20
+
+dropout_rate = 0.5
+nb_epoch = 20
