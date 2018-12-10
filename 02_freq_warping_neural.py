@@ -14,9 +14,7 @@ import os
 import pickle
 import pprint
 
-import logging
 import cProfile
-
 import numpy as np
 
 import torch
@@ -26,6 +24,22 @@ import torch.nn.functional as F
 from torchsummary.torchsummary import summary
 from tensorboardX import SummaryWriter
 
+import logging
+import datetime
+
+os.system("mkdir -p logs")
+logging.basicConfig(
+    filename="logs/" + ":".join(str(datetime.datetime.now()).split(":")[:-1]),
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s',
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+
+try:
+    import coloredlogs
+    coloredlogs.install(level=logging.DEBUG, fmt='%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s')
+except ModuleNotFoundError:
+    pass
 
 # TODO config here, like in 01_make_dict.py
 args = config_get_config("config/config")
@@ -49,17 +63,10 @@ patience = int(args['patience'])
 nb_epoch = int(args['nb_epoch'])
 dropout_rate = float(args['dropout_rate'])
 
-logging.basicConfig(
-    format='== %(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s ==',
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-
-logging.getLogger().setLevel(logging.DEBUG)
-
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 print("====================================================================")
-logging.info("Start training frequency warping")
+logging.debug("Start training frequency warping")
 use_cuda = torch.cuda.is_available()
 
 if use_cuda:
@@ -83,7 +90,7 @@ def io_read_data(filename, filetype='npy'):
         with open(os.path.join(filename), "rb") as f:
             return pickle.load(f)
     else:
-        print(filetype, "is not supported by far. Exiting ...")
+        logging.critical(filetype, "is not supported by far. Exiting ...")
         exit()
 
 
@@ -159,11 +166,20 @@ class Net(nn.Module):
     def forward(self, x, h_state):
         out, h_state = self.lstm(x, h_state)
         output_fc = []
+
         for frame in out:
             # output_fc.append(self.fc3(torch.tanh(self.fc2(torch.tanh(self.fc1(frame))))))
             output_fc.append(self.fc3(torch.tanh(self.fc1(frame))))
 
         return torch.stack(output_fc), h_state
+
+    def hidden_init(self):
+        if use_cuda:
+            h_state = torch.stack([torch.zeros(nb_lstm_layers, batch_size, 20) for _ in range(2)]).cuda()
+        else:
+            h_state = torch.stack([torch.zeros(nb_lstm_layers, batch_size, 20) for _ in range(2)])
+
+        return h_state
 
         # out = self.fc1(out)
         # out = self.fc2(out)
@@ -194,18 +210,12 @@ def train():
     net.train()
 
     # optimizer = optim.SGD(net.parameters(), lr=0.001)
-    optimizer = optim.Adam(net.parameters(), lr=0.01, weight_decay=0.0001)
+    optimizer = optim.Adam(net.parameters(), lr=0.00001, weight_decay=0.0001)
     criterion = nn.MSELoss()
 
     logging.info("Reading data ...")
     data = io_read_data(speakerA + '2' + speakerB + '_mfcc_25ms_10ms.pkl')
 
-    if use_cuda:
-        h_state = torch.stack([torch.zeros(nb_lstm_layers, batch_size, 20) for _ in range(2)]).cuda()
-    else:
-        h_state = torch.stack([torch.zeros(nb_lstm_layers, batch_size, 20) for _ in range(2)])
-
-    # print(h_state.shape)
     best_avg_loss = 10000
     best_avg_loss_at_epoch = 0
 
@@ -215,7 +225,7 @@ def train():
         loss_sum = 0
 
         batch_x = None
-        for i in (range(len(data))):
+        for i in (range(len(data))[:30]):
             if use_cuda:
                 temp_x = torch.tensor(data[i][0]).cuda()
                 temp_y = torch.tensor(data[i][1]).cuda()
@@ -223,10 +233,14 @@ def train():
                 temp_x = torch.tensor(data[i][0])
                 temp_y = torch.tensor(data[i][1])
 
+            # print(temp_x.shape, temp_y.shape)
+
             for ii in range(0, data[i][0].shape[0] - nb_frame_in_batch*2 + 1):
                 # batch_x, batch_y = temp_x[ii: ii + batch_size], temp_y[ii: ii + batch_size]
                 batch_x, batch_y = get_batches(temp_x, temp_y, ii, batch_size, nb_frame_in_batch)
                 optimizer.zero_grad()
+
+                h_state = net.hidden_init()  # New added Dec 07: They say hidden state need to be clear before each step
 
                 prediction, h_state = net(batch_x.float(), h_state)
                 # prediction = net(batch_x.unsqueeze(0).float(), None)
@@ -245,14 +259,15 @@ def train():
                 count += 1
 
                 if ii % 50 == 0:
-                    logging.info("Epoch {}, step {}: loss: {}".format(epoch, ii, float(loss.data)))
+                    logging.debug("Step {}: loss: {}".format(ii, float(loss.data)))
                     writer.add_scalar("loss/minibatch", loss_sum / count, global_step=epoch * i + ii)
             else:
                 print("====================================================================")
                 # input()
+                pass
 
         else:
-            # writer.add_scalar("loss/minibatch", loss_sum / count, global_step=epoch)
+            writer.add_scalar("loss/minibatch", loss_sum / count, global_step=epoch)
             writer.add_graph(net, (batch_x.float(), h_state), verbose=False)
 
         # for m_index, m in enumerate(net.parameters()):
