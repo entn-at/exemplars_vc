@@ -7,7 +7,9 @@
 """
 
 from __future__ import print_function
-from utils import config_get_config
+
+from utils import config_get_config, io_read_data
+from models import Net
 from tqdm import tqdm
 
 import os
@@ -23,6 +25,9 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torchsummary.torchsummary import summary
 from tensorboardX import SummaryWriter
+
+from sklearn.model_selection import train_test_split
+from scipy.stats import describe
 
 import logging
 import datetime
@@ -42,6 +47,7 @@ except ModuleNotFoundError:
     pass
 
 # TODO config here, like in 01_make_dict.py
+print("====================================================================")
 args = config_get_config("config/config")
 
 pprint.pprint(args)
@@ -62,6 +68,7 @@ nb_frame_in_batch = int(args['nb_frame_in_batch'])
 patience = int(args['patience'])
 nb_epoch = int(args['nb_epoch'])
 dropout_rate = float(args['dropout_rate'])
+bidirectional = int(bool(args['bidirectional']))
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -73,25 +80,6 @@ if use_cuda:
     print("Using GPU id={}. Device name: {}".format(torch.cuda.current_device(), torch.cuda.get_device_name(torch.cuda.current_device())))
 else:
     print("GPU is not available. Using CPU ...")
-
-
-def io_read_data(filename, filetype='npy'):
-    """
-    read data from npy. MFCCs only by far
-    :param datapath:
-    :return:
-    """
-    filepath = os.path.join(os.path.join(ROOT_DIR, 'data/vc'), filename)
-    logging.info("Reading from {}".format(filename))
-
-    if filetype == 'npy':
-        return np.load(filepath)
-    elif filetype == 'pkl':
-        with open(os.path.join(filename), "rb") as f:
-            return pickle.load(f)
-    else:
-        logging.critical(filetype, "is not supported by far. Exiting ...")
-        exit()
 
 
 def get_batches(data0, data1, ii, batch_size, nb_frame_in_batch):
@@ -108,8 +96,26 @@ def get_batches(data0, data1, ii, batch_size, nb_frame_in_batch):
     return torch.stack(batch_x, dim=0), torch.stack(batch_y, dim=0)
 
 
-def save_checkpoint(filename, model):
-    torch.save(model.state_dict(), os.path.join('checkpoints/', filename))
+def save_checkpoint(filename, model, state=None):
+    """
+    Save the torch model. If state is not None, save all the model, state of the training progress (lr, epoch, ...). Else, save the model only
+    For more detail about torch's load/save progress, see:
+            https://stackoverflow.com/questions/42703500/best-way-to-save-a-trained-model-in-pytorch
+    :param filename: name of the checkpoint
+    :param model: the model
+    :param state: the state of the training progress, contain the model itself. Optional
+    :return:
+    """
+    if not state:
+        torch.save(model.state_dict(), os.path.join('checkpoints/', filename))
+    else:
+        _state = {
+            'epoch': state['epoch'],
+            'state_dict': state['state_dict'].state_dict(),
+            'optimizer': state['optimizer'].state_dict()
+        }
+
+        torch.save(_state, os.path.join('checkpoints/', filename))
 
 
 def logdir():
@@ -120,80 +126,35 @@ def logdir():
          |--2
          |--3
          |--4
-        To this case, "5" will be returned
+        To this case, "5" will be returned. Even with the case
     :return:
     """
     listdir = [xx for xx in os.listdir("runs/") if os.path.isdir(os.path.join("runs", xx))]
 
-    max = 0
+    max_ = 0
     for i in range(len(listdir)):
         try:
             filename = int(listdir[i])
-            if max < filename:
-                max = filename
+            if max_ < filename:
+                max_ = filename
         except ValueError:
             continue
 
-    return str(max + 1)
-# First try: 2018 Dec 03
+    return str(max_ + 1)
 
 
-def fw_neural_network(*args, **kwargs):
-    """
-    This define neural-based approach for frequency mapping
-    :param args: placeholder
-    :param kwargs: placeholder
-    :return: kind of f(x)
-    """
-    raise NotImplementedError
-
-
-class Net(nn.Module):
-    def __init__(self, in_size, hidden_size, out_size, nb_lstm_layers):
-        super().__init__()
-        self.in_size = in_size
-        self.hidden_size = hidden_size
-        self.out_size = out_size
-        self.nb_lstm_layers = nb_lstm_layers
-
-        # self.fc1 = nn.Linear()
-        self.lstm = nn.LSTM(input_size=self.in_size, hidden_size=self.hidden_size, num_layers=self.nb_lstm_layers, batch_first=True, bias=True)
-        # self.fc = nn.Linear(self.hidden_size, self.out_size)
-        self.fc1 = nn.Linear(self.hidden_size, 128)
-        self.fc2 = nn.Linear(128, 128)
-        self.fc3 = nn.Linear(128, self.out_size)
-
-    def forward(self, x, h_state):
-        out, h_state = self.lstm(x, h_state)
-        output_fc = []
-
-        for frame in out:
-            # output_fc.append(self.fc3(torch.tanh(self.fc2(torch.tanh(self.fc1(frame))))))
-            output_fc.append(self.fc3(torch.tanh(self.fc1(frame))))
-
-        return torch.stack(output_fc), h_state
-
-    def hidden_init(self):
-        if use_cuda:
-            h_state = torch.stack([torch.zeros(nb_lstm_layers, batch_size, 20) for _ in range(2)]).cuda()
-        else:
-            h_state = torch.stack([torch.zeros(nb_lstm_layers, batch_size, 20) for _ in range(2)])
-
-        return h_state
-
-        # out = self.fc1(out)
-        # out = self.fc2(out)
-        # out = self.fc3(out)
-        # out = self.fc(out)
-        # return out
-
-
-def train():
+def train(data_train, data_test):
     """
     See this script for more information
     https://github.com/MorvanZhou/PyTorch-Tutorial/blob/master/tutorial-contents/403_RNN_regressor.py
     :return:
     """
+    data = data_train
+    # # xxx = [item for xx in data for item in xx]
+    # xxx = []
+    # for xx in data:
+    #     xxx.extend(xx.flatten())
+
     checkpoint_and_write_save_dir = logdir()
 
     os.system("mkdir -p checkpoints")
@@ -204,71 +165,77 @@ def train():
     logging.info("Building architecture...")
 
     if use_cuda:
-        net = Net(20, 20, 20, nb_lstm_layers).cuda()
+        net = Net(20, 20, 20, nb_lstm_layers, batch_size).cuda()
     else:
-        net = Net(20, 20, 20, nb_lstm_layers)
+        net = Net(20, 20, 20, nb_lstm_layers, batch_size)
     net.train()
 
     # optimizer = optim.SGD(net.parameters(), lr=0.001)
-    optimizer = optim.Adam(net.parameters(), lr=0.00001, weight_decay=0.0001)
-    criterion = nn.MSELoss()
+    # optimizer = optim.Adam(net.parameters(), lr=0.005, weight_decay=0.0001)
+    optimizer = optim.RMSprop(net.parameters(), lr=0.005, weight_decay=0.0001)
+
+    # criterion = nn.MSELoss()
+    criterion = nn.L1Loss()
 
     logging.info("Reading data ...")
-    data = io_read_data(speakerA + '2' + speakerB + '_mfcc_25ms_10ms.pkl')
 
-    best_avg_loss = 10000
+    best_avg_loss = 1000000
     best_avg_loss_at_epoch = 0
 
     logging.info("START TRAINING ... MAX EPOCH: " + str(nb_epoch))
     for epoch in range(nb_epoch):
+        print("====================================================================")
         count = 0
         loss_sum = 0
 
-        batch_x = None
-        for i in (range(len(data))[:30]):
+        for i in range(len(data)):
             if use_cuda:
                 temp_x = torch.tensor(data[i][0]).cuda()
                 temp_y = torch.tensor(data[i][1]).cuda()
             else:
                 temp_x = torch.tensor(data[i][0])
                 temp_y = torch.tensor(data[i][1])
+                
+            # exit()
+            # for ii in range(0, data[i][0].shape[0] - nb_frame_in_batch*2 + 1):
+            optimizer.zero_grad()
 
-            # print(temp_x.shape, temp_y.shape)
+            h_state = net.hidden_init(temp_x)  # New added Dec 07: They say hidden state need to be clear before each step
 
-            for ii in range(0, data[i][0].shape[0] - nb_frame_in_batch*2 + 1):
-                # batch_x, batch_y = temp_x[ii: ii + batch_size], temp_y[ii: ii + batch_size]
-                batch_x, batch_y = get_batches(temp_x, temp_y, ii, batch_size, nb_frame_in_batch)
-                optimizer.zero_grad()
+            # prediction, h_state = net(batch_x.float(), h_state)
+            prediction, h_state = net(temp_x.float(), h_state)
+            # prediction = net(batch_x.unsqueeze(0).float(), None)
 
-                h_state = net.hidden_init()  # New added Dec 07: They say hidden state need to be clear before each step
+            loss = criterion(prediction.float(), temp_y.float().view(len(temp_y), batch_size, -1))
 
-                prediction, h_state = net(batch_x.float(), h_state)
-                # prediction = net(batch_x.unsqueeze(0).float(), None)
+            # h_state = (h_state[0].detach(), h_state[1].detach())
 
-                # Do we need h_state?
-                # h_state = h_state.data
+            loss.backward()
+            optimizer.step()
 
-                loss = criterion(prediction.float(), batch_y.float())
-
-                h_state = (h_state[0].detach(), h_state[1].detach())
-
-                loss.backward()
-                optimizer.step()
-
-                loss_sum += loss
-                count += 1
-
-                if ii % 50 == 0:
-                    logging.debug("Step {}: loss: {}".format(ii, float(loss.data)))
-                    writer.add_scalar("loss/minibatch", loss_sum / count, global_step=epoch * i + ii)
-            else:
-                print("====================================================================")
-                # input()
-                pass
+            loss_sum += loss
+            count += 1
 
         else:
+            with torch.no_grad():
+                losses = []
+                for i in range(len(data_test)):
+                    if use_cuda:
+                        temp_x = torch.tensor(data_test[i][0]).cuda()
+                        temp_y = torch.tensor(data_test[i][1]).cuda()
+                    else:
+                        temp_x = torch.tensor(data_test[i][0])
+                        temp_y = torch.tensor(data_test[i][1])
+
+                    h_state = net.hidden_init(temp_x)
+                    prediction, h_state = net(temp_x.float(), h_state)
+                    loss = criterion(prediction.float(), temp_y.float().view(len(temp_y), batch_size, -1))
+
+                    losses.append(loss.data.item())
+            logging.info(describe(losses))
+
             writer.add_scalar("loss/minibatch", loss_sum / count, global_step=epoch)
-            writer.add_graph(net, (batch_x.float(), h_state), verbose=False)
+            # writer.add_graph(net, (temp_x.float(), h_state), verbose=True)
 
         # for m_index, m in enumerate(net.parameters()):
         #     print(m_index)
@@ -279,7 +246,13 @@ def train():
 
         avg_loss = loss_sum / count
         if avg_loss < best_avg_loss:
-            save_checkpoint(MODEL_PTH_NAME + "_epoch" + str(epoch) + "_" + str(round(float(avg_loss), 3)), model=net)
+            state = {
+                'epoch': epoch,
+                'state_dict': net,
+                'optimizer': optimizer
+            }
+
+            save_checkpoint(checkpoint_and_write_save_dir + "/" + MODEL_PTH_NAME + "_epoch" + str(epoch) + "_" + str(round(float(avg_loss), 3)), model=net, state=state)
 
             logging.info("Epoch {}: average loss = {:.3f}, improve {:.3f} from {:.3f}. Model saved at checkpoints/{}/{}.pth"
                          .format(epoch, avg_loss, best_avg_loss - avg_loss, best_avg_loss, checkpoint_and_write_save_dir, MODEL_PTH_NAME + "_epoch" + str(epoch) + "_" + str(round(float(avg_loss), 3))))
@@ -295,11 +268,20 @@ def train():
 
     writer.close()
 
+    return net
+
+
+def evaluate(model, dataset):
+    pass
+
+
+def norm(data):
+    pass
+
 
 def main():
-    train()
-    # cProfile("train()")
-    # print(logdir())
+    data_train, data_test = io_read_data(speakerA + '2' + speakerB + '_mfcc_25ms_10ms.pkl', 'pkl')
+    train(data_train, data_test)
 
 
 if __name__ == "__main__":
