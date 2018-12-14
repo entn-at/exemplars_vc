@@ -97,8 +97,8 @@ def feat_mfcc(audiodata, sr=16000):
     :return:
     """
     mfccs = []
-    for audio in audiodata:
-        mfccs.append(lbr.feature.mfcc(audio, sr=sr))
+    for audio in tqdm(audiodata):
+        mfccs.append(lbr.util.normalize(lbr.feature.mfcc(audio, sr=sr, n_fft=400, hop_length=160), norm=1, axis=0))
 
     # return np.stack(mfccs)
     return mfccs
@@ -162,7 +162,7 @@ def final_make_dict():
 
     # Dump to npy
     os.system("mkdir -p " + feature_path)
-    with open(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc" + ".pkl"), "wb") as f:
+    with open(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc_25ms_10ms_norm" + ".pkl"), "wb") as f:
         pickle.dump(exemplars, f, protocol=3)
 
     # np.save(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc" + ".npy"), exemplars)
@@ -173,8 +173,8 @@ def debug_profiling_main():
 
 
 if __name__ == "__main__":
-    # final_make_dict()
-    cProfile.run('final_make_dict()', )
+    final_make_dict()
+    # cProfile.run('final_make_dict()', )
 
     # args = config_get_config("config/config")
     #

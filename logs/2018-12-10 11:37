@@ -1,0 +1,6 @@
+2018-12-10 11:37:03 DEBUG 02_freq_warping_neural - <module>: Start training frequency warping
+2018-12-10 11:37:03 INFO 02_freq_warping_neural - train: Building architecture...
+2018-12-10 11:37:03 INFO 02_freq_warping_neural - train: Reading data ...
+2018-12-10 11:37:03 INFO 02_freq_warping_neural - io_read_data: Reading from SF12TF1_mfcc_25ms_10ms.pkl
+2018-12-10 11:37:03 INFO 02_freq_warping_neural - train: START TRAINING ... MAX EPOCH: 20
+2018-12-10 11:37:07 INFO 02_freq_warping_neural - train: Epoch 0: average loss = 12428.159, improve 987571.812 from 1000000.000. Model saved at checkpoints/107/checkpoint_epoch0_12428.159.pth

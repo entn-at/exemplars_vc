@@ -11,9 +11,17 @@ sr = 16000
 feature_path = data/vc
 
 [NET]
+bidirectional = False
+
 in_size = 20
 hidden_size = 20
 out_size = 20
 
 dropout_rate = 0.5
 nb_epoch = 20
+batch_size = 1
+nb_frame_in_batch = 16
+checkpoint_name = checkpoint
+nb_lstm_layers = 2
+
+patience = 30

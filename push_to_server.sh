@@ -1,1 +1,1 @@
-scp -r $1 voice@10.30.153.$2:/data/kinhph/workspace/VoiceConversion/exemplar_vc
+scp -r ${1} voice@10.30.153.${2}:/data/kinhph/workspace/VoiceConversion/exemplar_vc/${3}

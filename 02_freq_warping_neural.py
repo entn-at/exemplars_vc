@@ -175,7 +175,7 @@ def train(data_train, data_test):
     optimizer = optim.RMSprop(net.parameters(), lr=0.005, weight_decay=0.0001)
 
     # criterion = nn.MSELoss()
-    criterion = nn.L1Loss()
+    criterion = nn.L1Loss(size_average=False)
 
     logging.info("Reading data ...")
 

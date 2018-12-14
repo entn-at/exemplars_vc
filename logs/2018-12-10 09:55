@@ -1,0 +1,8 @@
+2018-12-10 09:55:17 DEBUG 02_freq_warping_neural - <module>: Start training frequency warping
+2018-12-10 09:55:17 INFO 02_freq_warping_neural - train: Building architecture...
+2018-12-10 09:55:17 INFO 02_freq_warping_neural - train: Reading data ...
+2018-12-10 09:55:17 INFO 02_freq_warping_neural - io_read_data: Reading from SF12TF1_mfcc_25ms_10ms.pkl
+2018-12-10 09:55:17 INFO 02_freq_warping_neural - train: START TRAINING ... MAX EPOCH: 20
+2018-12-10 09:55:17 DEBUG 02_freq_warping_neural - train: Step 0: loss: 14977.404296875
+2018-12-10 09:55:26 INFO 02_freq_warping_neural - train: Epoch 0: average loss = 13218.044. No improvement since epoch 0
+2018-12-10 09:55:27 DEBUG 02_freq_warping_neural - train: Step 0: loss: 14976.876953125

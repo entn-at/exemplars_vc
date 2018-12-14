@@ -1,0 +1,1 @@
+scp -r voice@10.30.153.${2}:/data/kinhph/workspace/VoiceConversion/exemplar_vc/${1} ${1}

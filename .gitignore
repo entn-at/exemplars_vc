@@ -1,0 +1,7 @@
+# Default ignored files
+/.idea/shelf/
+/.idea/workspace.xml
+
+# Project files
+/checkpoints/
+/runs/

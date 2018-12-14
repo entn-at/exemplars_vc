@@ -1,0 +1,4 @@
+2018-12-10 17:39:28 DEBUG 02_freq_warping_neural - <module>: Start training frequency warping
+2018-12-10 17:39:28 INFO utils - io_read_data: Reading from SF12TF1_mfcc_25ms_10ms.pkl
+2018-12-10 17:39:44 DEBUG 02_freq_warping_neural - <module>: Start training frequency warping
+2018-12-10 17:39:44 INFO utils - io_read_data: Reading from SF12TF1_mfcc_25ms_10ms.pkl

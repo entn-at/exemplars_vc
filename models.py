@@ -57,7 +57,7 @@ except ModuleNotFoundError:
 
 
 class Net(nn.Module):
-    def __init__(self, in_size, hidden_size, out_size, nb_lstm_layers, batch_size, bidirectional=False):
+    def __init__(self, in_size, hidden_size, out_size, nb_lstm_layers, batch_size, fc_neuron=1024, bidirectional=False):
         super().__init__()
         self.in_size = in_size
         self.hidden_size = hidden_size
@@ -65,13 +65,14 @@ class Net(nn.Module):
         self.nb_lstm_layers = nb_lstm_layers
         self.bi = int(bool(bidirectional)) + 1
         self.batch_size = batch_size
+        self.fc_neuron = fc_neuron
 
         # self.fc1 = nn.Linear()
         self.lstm = nn.LSTM(input_size=self.in_size, hidden_size=self.hidden_size, num_layers=self.nb_lstm_layers, batch_first=False, bidirectional=False)
         # self.fc = nn.Linear(self.hidden_size, self.out_size)
-        self.fc1 = nn.Linear(self.hidden_size, 128)
-        # self.fc2 = nn.Linear(128, 128)
-        self.fc3 = nn.Linear(128, self.out_size)
+        self.fc1 = nn.Linear(self.hidden_size, self.fc_neuron)
+        self.fc2 = nn.Linear(self.fc_neuron, self.fc_neuron)
+        self.fc3 = nn.Linear(self.fc_neuron, self.out_size)
         self.fc4 = nn.Linear(self.hidden_size, self.out_size)
 
     def forward(self, x, h_state):
