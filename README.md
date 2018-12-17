@@ -1,5 +1,10 @@
 # Exemplar voice conversion
 
+### Todo list
+
+- [ ] Documentation for important function
+- [ ] ...
+
 Exemplar-based voice conversion  
 ### 1. dict  
 ### 2. NN attempt for fw  
@@ -8,7 +13,8 @@ Exemplar-based voice conversion
 
 ## Update 2018 Dec 14:
 #### Big update: The old version seems to be wrong at first attempt: 
-1. The DTW is not used for time-series data. It must be used on spectra-features, depends on whether it is DFW, AFW or CFW
+1. <del>The DTW is not used for time-series data. It must be used on spectra-features, depends on whether it is DFW, AFW or CFW</del> DTW is first applied on time series data to get a parallel training set, then either DFW, AFW or CFW is applied to that parallel data
+
 2. W is not a function, it is a MATRIX belong to R^(MxN)
 
 #### Unresolved problem:
@@ -17,5 +23,3 @@ Exemplar-based voice conversion
 #### What changes:
 1. Old code will  be moved to *old_code* directory
 2. New code will take over, with the same name
-
-
