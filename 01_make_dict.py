@@ -24,9 +24,26 @@ import matplotlib.pyplot as plt
 import logging
 import cProfile
 
+import pysptk
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
+
+# parse the configuration
+args = config_get_config("config/config")
+
+frame_length = int(args['feat_frame_length'])
+overlap = float(args['feat_overlap'])
+hop_length = int(frame_length * overlap)
+order = int(args['feat_order'])
+alpha = float(args['feat_alpha'])
+gamma = float(args['feat_gamma'])
+
+data_path = args['DataPath']
+speakerA = args['SpeakerA']
+speakerB = args['SpeakerB']
+feature_path = args['feature_path']
+sr = int(args['sampling_rate'])
 
 
 def io_read_audio(filepath):
@@ -77,7 +94,6 @@ def io_read_speaker_data(datapath, speaker, savetype='npy'):
     :param savetype:
     :return:
     """
-
     path = os.path.join(savetype, speaker) + ".npy"
     if savetype == 'npy':
         if os.path.isfile(path):
@@ -90,59 +106,92 @@ def io_read_speaker_data(datapath, speaker, savetype='npy'):
         exit()
 
 
-def feat_mfcc(audiodata, sr=16000):
+# This is wrong (as we need MCEP, not MFCC). Nevertheless, preserving this is necessary.
+# Updated 2018 Dec 14: Edit feat_mfccs to extract_features, with multiple choice of choosing feature to extract. Default is mcep
+# TODO feat argument need to be implement as a list, support multiple featuretype return
+def extract_features(audiodata, sr=16000, feat='mcep'):
     """
-    extract mfcc from audio time series data (from librosa.load)
+    Feature extraction. For each type of feature, see corresponding case below
+    Currently support: MCEP, MFCC. Will be updated when needed
     :param audiodata: 162 files time-series data
+    :param sr: sampling rate.
+    :param feat: type of currently supported feature
     :return:
     """
-    mfccs = []
-    for audio in tqdm(audiodata):
-        mfccs.append(lbr.util.normalize(lbr.feature.mfcc(audio, sr=sr, n_fft=400, hop_length=160), norm=1, axis=0))
+    if feat.lower() == 'mfcc':
+        """
+            extract mfcc from audio time series data (from librosa.load)
+        """
+        mfccs = []
+        for audio in tqdm(audiodata):
+            mfccs.append(lbr.util.normalize(lbr.feature.mfcc(audio, sr=sr, n_fft=frame_length, hop_length=hop_length), norm=1, axis=0))
 
-    # return np.stack(mfccs)
-    return mfccs
+        # return np.stack(mfccs)
+        return mfccs, feat
+
+    elif feat.lower() == 'mcep' or feat.lower() == 'mcc':
+        """ 
+            MCEP is extracted via pysptk. See the link below for more details
+            https://github.com/eYSIP-2017/eYSIP-2017_Speech_Spoofing_and_Verification/wiki/Feature-Extraction-for-Speech-Spoofing
+            
+            Example of using pysptk to extract mcep (copied from the above link):             
+                frameLength = 1024
+                overlap = 0.25
+                hop_length = frameLength * overlap
+                order = 25
+                alpha = 0.42
+                gamma = -0.35
+            
+                sourceframes = librosa.util.frame(speech, frame_length=frameLength, hop_length=hop_length).astype(np.float64).T
+                sourceframes *= pysptk.blackman(frameLength)
+                sourcemcepvectors = np.apply_along_axis(pysptk.mcep, 1, sourceframes, order, alpha)
+        """
+        mceps = []
+        for audio in tqdm(audiodata):
+            frame = lbr.util.frame(audio, frame_length=frame_length, hop_length=hop_length).T
+            frame *= pysptk.blackman(frame_length)
+
+            mceps.append(np.apply_along_axis(pysptk.mcep, 1, frame, order=order, alpha=alpha).T)
+
+        return mceps, feat
+    else:
+        logging.critical('{} feature is not supported yet, exiting ...')
+        exit()
 
 
-def make_dict_from_mfcc(feat_mfcc_A, feat_mfcc_B):
+# EDIT 2018 Dec 17: This function will be removed. It will later be split to 3 separated function: `make_A`, `make_R`, `make_W`
+def make_dict_from_feat(feat_A, feat_B):
     """
-    Final function: return the "dictionary" of exemplars
+    Final function: return the "dictionary" of exemplars, which is construct by alignment of DTW
     Tentative: return a list, each item is a tuple size of 2, which is A and B, for src and tar speaker
     :param dtw_path: path[0], path[1]
     :return:
     """
+
     dtw_paths = []
-    for i in range(len(feat_mfcc_A)):
-        dist, cost, cum_cost, path = dtw(feat_mfcc_A[i].T, feat_mfcc_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
+
+    for i in range(len(feat_A)):
+        dist, cost, cum_cost, path = dtw(feat_A[i].T, feat_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
         dtw_paths.append(path)
 
     exemplars = []
     for idx_file, path in tqdm(enumerate(dtw_paths)):
         a = []
         b = []
+
         for it in range(len(path[0])):
             try:
-                a.append(feat_mfcc_A[idx_file].T[path[0][it]])
-                b.append(feat_mfcc_B[idx_file].T[path[1][it]])
+                a.append(feat_A[idx_file].T[path[0][it]])
+                b.append(feat_B[idx_file].T[path[1][it]])
             except Exception as e:
                 input("Error occur. Press any key to exit ...")
                 exit()
 
         exemplars.append(np.stack([np.asarray(a), np.asarray(b)], axis=0))
-
     return exemplars
 
 
 def final_make_dict():
-    args = config_get_config("config/config")
-
-    # parse the configuration
-    data_path = args['DataPath']
-    speakerA = args['SpeakerA']
-    speakerB = args['SpeakerB']
-    feature_path = args['feature_path']
-    sr = args['sampling_rate']
-
     # TODO should add argument to python call
     # TODO to specify which speaker to cover
 
@@ -150,19 +199,20 @@ def final_make_dict():
     speakerAdata = io_read_speaker_data(data_path, speakerA, savetype='npy')
     speakerBdata = io_read_speaker_data(data_path, speakerB, savetype='npy')
 
-    # Extract the MFCCs from time-series
-    feat_mfcc_A = feat_mfcc(speakerAdata, sr=sr)
-    feat_mfcc_B = feat_mfcc(speakerBdata, sr=sr)
+    # Extract features from time-series
+    feat_A, feat_type_A = extract_features(speakerAdata, sr=sr, feat='mcep')
+    feat_B, feat_type_B = extract_features(speakerBdata, sr=sr, feat='mcep')
 
-    # for i in range(len(feat_mfcc_B)):
-    #     print(feat_mfcc_A[i].shape, feat_mfcc_B[i].shape)
+    assert feat_type_A == feat_type_B, "Inconsistent feature type. 2 speaker must have the same type of extracted features."
 
-    exemplars = make_dict_from_mfcc(feat_mfcc_A, feat_mfcc_B)
+    exemplars = make_dict_from_feat(feat_A, feat_B)
     print(exemplars[0].shape, exemplars[1].shape)
 
     # Dump to npy
     os.system("mkdir -p " + feature_path)
-    with open(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc_25ms_10ms_norm" + ".pkl"), "wb") as f:
+    # with open(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc_25ms_10ms_norm" + ".pkl"), "wb") as f:
+    with open(os.path.join(feature_path, "{}2{}_{}_{}ms_{}ms.pkl".format(
+            speakerA, speakerB, 'mcep', int(frame_length * 1000 / sr), int(hop_length * 1000 / sr))), "wb") as f:
         pickle.dump(exemplars, f, protocol=3)
 
     # np.save(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc" + ".npy"), exemplars)
@@ -175,37 +225,3 @@ def debug_profiling_main():
 if __name__ == "__main__":
     final_make_dict()
     # cProfile.run('final_make_dict()', )
-
-    # args = config_get_config("config/config")
-    #
-    # # parse the configuration
-    # data_path = args['DataPath']
-    # speakerA = args['SpeakerA']
-    # speakerB = args['SpeakerB']
-    # sr = args['sampling_rate']
-    #
-    # # TODO should add argument to python call
-    # # TODO to specify which speaker to cover
-    #
-    # # Read audio time-series from npy
-    # speakerAdata = io_read_speaker_data("data", speakerA, savetype='npy')
-    # speakerBdata = io_read_speaker_data("data", speakerB, savetype='npy')
-    #
-    # # Extract the MFCCs from time-series
-    # feat_mfcc_A = feat_mfcc(speakerAdata, sr=sr)
-    # feat_mfcc_B = feat_mfcc(speakerBdata, sr=sr)
-    #
-    # # plt.subplot(2, 1, 1)
-    # # display.specshow(feat_mfcc_A[0])
-    # #
-    # # plt.subplot(2, 1, 2)
-    # # display.specshow(feat_mfcc_B[0])
-    #
-    #
-    #
-    # # print(path[0].shape, path[1].shape)
-    # # plt.imshow(cost.T, origin='lower', interpolation='nearest')
-    # # plt.plot(path[0], path[1])
-    # # plt.show()
-    #
-    #
