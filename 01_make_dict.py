@@ -16,6 +16,8 @@ import pickle
 import configparser
 
 import os
+import pdb
+
 import librosa as lbr
 import numpy as np
 import matplotlib.pyplot as plt
@@ -147,7 +149,7 @@ def extract_features(audiodata, sr=16000, feat='mcep'):
                 sourcemcepvectors = np.apply_along_axis(pysptk.mcep, 1, sourceframes, order, alpha)
         """
         mceps = []
-        for audio in tqdm(audiodata):
+        for audio in tqdm(audiodata[:3]):
             frame = lbr.util.frame(audio, frame_length=frame_length, hop_length=hop_length).T
             frame *= pysptk.blackman(frame_length)
 
@@ -160,6 +162,7 @@ def extract_features(audiodata, sr=16000, feat='mcep'):
 
 
 # EDIT 2018 Dec 17: This function will be removed. It will later be split to 3 separated function: `make_A`, `make_R`, `make_W`
+# See commit 4b0d1d716821934afb53b086bb9e351cc5d53f5b for "before separating behavior"
 def make_dict_from_feat(feat_A, feat_B):
     """
     Final function: return the "dictionary" of exemplars, which is construct by alignment of DTW
@@ -167,7 +170,6 @@ def make_dict_from_feat(feat_A, feat_B):
     :param dtw_path: path[0], path[1]
     :return:
     """
-
     dtw_paths = []
 
     for i in range(len(feat_A)):
@@ -191,6 +193,92 @@ def make_dict_from_feat(feat_A, feat_B):
     return exemplars
 
 
+def _dtw_alignment(feat_A, feat_B):
+    """
+    Calculate dtw_path, for constructing exemplar dictionaries (see make_exemplar_dict_A, R, W)
+    :param feat_A: shape of (162 audio file, ...)
+    :param feat_B: shape of (162 audio file, ...)
+    :return: dtw path of 162 file
+    """
+    dtw_paths = []
+
+    for i in range(len(feat_A)):
+        dist, cost, cum_cost, path = dtw(feat_A[i].T, feat_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
+        dtw_paths.append(path)
+
+    exemplars = []
+    full_A = []
+    full_B = []
+    for idx_file, path in tqdm(enumerate(dtw_paths)):
+        a = []
+        b = []
+
+        for it in range(len(path[0])):
+            try:
+                a.append(feat_A[idx_file].T[path[0][it]])
+                b.append(feat_B[idx_file].T[path[1][it]])
+            except Exception as e:
+                input("Error occur. Press any key to exit ...")
+                exit()
+
+        full_A.append(np.asarray(a))
+        full_B.append(np.asarray(b))
+        # exemplars.append(np.stack([np.asarray(a), np.asarray(b)], axis=0))
+
+    return dtw_paths, full_A, full_B
+
+
+def make_exemplar_dict_A(dtw_paths, feat_A):
+    """
+    :param feat_A: shape (162, ...)
+    :param dtw_paths: shape (162 audio file, ...)
+    :return: A_exemplar_dict.
+    """
+    A_exemplars_dict = []
+
+    for idx, path in enumerate(dtw_paths):
+        temp = []
+        for i in range(len(path[1])):
+            temp.append(feat_A[idx][path[1][i]])
+
+        A_exemplars_dict.append(np.asarray(temp))
+
+    return A_exemplars_dict
+
+
+def make_exemplar_dict_W(dtw_paths):
+    return [path[0] for path in dtw_paths]
+
+
+def make_exemplar_dict_R(dtw_paths, feat_B):
+    """
+    :param feat_A: shape (162, ...)
+    :param dtw_paths: shape (162 audio file, ...)
+    :return: A_exemplar_dict.
+    """
+    R_exemplars_dict = []
+    B_exemplars_dict = []
+
+    for idx, path in enumerate(dtw_paths):
+        temp = []
+        for i in range(len(path[1])):
+            temp.append(feat_B[idx][path[1][i]])
+
+        B_exemplars_dict.append(np.asarray(temp))
+
+    print(B_exemplars_dict[0].shape)
+    for idx, exemplar in enumerate(B_exemplars_dict):
+        temp = []
+        for jjj in range(len(exemplar)):
+            temp.append(np.exp(np.log(np.clip(feat_B[idx][jjj], 1e-10, None) - np.log(np.clip(exemplar[jjj], 1e-10, None)))))
+
+        R_exemplars_dict.append(np.asarray(temp))
+
+    return R_exemplars_dict
+
+# End of 2018 Dev 17 editing
+
+
 def final_make_dict():
     # TODO should add argument to python call
     # TODO to specify which speaker to cover
@@ -205,15 +293,26 @@ def final_make_dict():
 
     assert feat_type_A == feat_type_B, "Inconsistent feature type. 2 speaker must have the same type of extracted features."
 
-    exemplars = make_dict_from_feat(feat_A, feat_B)
-    print(exemplars[0].shape, exemplars[1].shape)
+    # Get dtw path. Note that feat_A and feat_B will be transposed to (n_frames, mel-cepstral order) shape
+    dtw_paths, feat_A, feat_B = _dtw_alignment(feat_A, feat_B)
 
-    # Dump to npy
-    os.system("mkdir -p " + feature_path)
-    # with open(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc_25ms_10ms_norm" + ".pkl"), "wb") as f:
-    with open(os.path.join(feature_path, "{}2{}_{}_{}ms_{}ms.pkl".format(
-            speakerA, speakerB, 'mcep', int(frame_length * 1000 / sr), int(hop_length * 1000 / sr))), "wb") as f:
-        pickle.dump(exemplars, f, protocol=3)
+    exemplar_A = make_exemplar_dict_A(dtw_paths, feat_A)
+    exemplar_R = make_exemplar_dict_R(dtw_paths, feat_B)
+    exemplar_W = make_exemplar_dict_W(dtw_paths)
+
+    print(type(exemplar_A), type(exemplar_R), type(exemplar_W))
+    print(exemplar_A[1].shape, exemplar_R[1].shape, exemplar_W[1].shape)
+    print(exemplar_R)
+
+    # exemplars = make_dict_from_feat(feat_A, feat_B)
+    # print(exemplars[0].shape, exemplars[1].shape)
+    #
+    # # Dump to npy
+    # os.system("mkdir -p " + feature_path)
+    # # with open(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc_25ms_10ms_norm" + ".pkl"), "wb") as f:
+    # with open(os.path.join(feature_path, "{}2{}_{}_{}ms_{}ms.pkl".format(
+    #         speakerA, speakerB, 'mcep', int(frame_length * 1000 / sr), int(hop_length * 1000 / sr))), "wb") as f:
+    #     pickle.dump(exemplars, f, protocol=3)
 
     # np.save(os.path.join(feature_path, speakerA + "2" + speakerB + "_mfcc" + ".npy"), exemplars)
 
