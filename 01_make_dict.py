@@ -10,7 +10,7 @@ from __future__ import print_function
 from tqdm import tqdm
 from dtw import dtw
 from librosa import display
-from utils import config_get_config
+from utils import config_get_config, logdir
 
 import pickle
 import configparser
@@ -279,6 +279,22 @@ def make_exemplar_dict_R(dtw_paths, feat_B):
 # End of 2018 Dev 17 editing
 
 
+# EDIT: Add pickling exemplar dictionaries
+def io_save_exemplar_dictionaries(exemplar_dict, protocol=3, savepath="data/vc/exem_dict"):
+    """
+    This function pickles every variables (exemplar dictionaries in this case) in args
+    :param exemplar_dict:
+    :param protocol:
+    :param savepath:
+    :return:
+    """
+    os.system("mkdir -p {}".format(savepath))
+
+    for filename, value in exemplar_dict.items():
+        with open(os.path.join(savepath, filename), "wb") as f:
+            pickle.dump(value, f, protocol=protocol)
+
+
 def final_make_dict():
     # TODO should add argument to python call
     # TODO to specify which speaker to cover
@@ -304,6 +320,13 @@ def final_make_dict():
     print(exemplar_A[1].shape, exemplar_R[1].shape, exemplar_W[1].shape)
     print(exemplar_R)
 
+    io_save_exemplar_dictionaries({
+        'exemplar_A': exemplar_A,
+        'exemplar_R': exemplar_R,
+        'exemplar_W': exemplar_W
+    })
+
+    from pyworld import decode_spectral_envelope, code_spectral_envelope, 
     # exemplars = make_dict_from_feat(feat_A, feat_B)
     # print(exemplars[0].shape, exemplars[1].shape)
     #
