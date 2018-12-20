@@ -8,9 +8,8 @@
 
 from __future__ import print_function
 from tqdm import tqdm
-from dtw import dtw
-from librosa import display
-from utils import config_get_config, logdir
+
+from utils import config_get_config, logdir, io_read_speaker_data, io_save_to_disk
 
 import pickle
 import configparser
@@ -19,24 +18,40 @@ import os
 import pdb
 
 import librosa as lbr
+import pysptk
+from dtw import dtw
+from fastdtw import fastdtw
+# from dtaidistance.dtw import distance_fast, best_path, best_path2, warping_paths
+from librosa import display
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 # for debugging
 import logging
 import cProfile
+import datetime
 
-import pysptk
+logging.basicConfig(
+    filename="logs/" + ":".join(str(datetime.datetime.now()).split(":")[:-1]),
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s',
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
-logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
+try:
+    import coloredlogs
+    coloredlogs.install(level=logging.DEBUG, fmt='%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s')
+except ModuleNotFoundError:
+    pass
 
 # parse the configuration
 args = config_get_config("config/config")
 
 frame_length = int(args['feat_frame_length'])
 overlap = float(args['feat_overlap'])
-hop_length = int(frame_length * overlap)
+# hop_length = int(frame_length * overlap) + 300
+hop_length = int(args['feat_hop_length'])
 order = int(args['feat_order'])
 alpha = float(args['feat_alpha'])
 gamma = float(args['feat_gamma'])
@@ -48,70 +63,10 @@ feature_path = args['feature_path']
 sr = int(args['sampling_rate'])
 
 
-def io_read_audio(filepath):
-    y, sr = lbr.load(filepath, sr=None)
-    return y, sr
-
-
-def io_save_to_disk(datapath, speaker='SF1', savetype='npy'):
-    """
-    this function will save all available audio of a speaker to npy/bin/pkl file
-    see this link for selecting best type for saving ndarray to disk
-    https://stackoverflow.com/questions/9619199/best-way-to-preserve-numpy-arrays-on-disk
-    :param datapath: path to data, the wav path should be in "speakerpath/speaker/*.wav"
-    :return: True if no error occurs. False otherwise
-    """
-    try:
-        # Read
-        speakerdir = os.path.join(datapath, speaker)
-
-        yA = []
-        print("=======================")
-        logging.debug("Read {} data".format(speaker))
-
-        # print("Read", speaker, "data")
-        for filename in tqdm(os.listdir(speakerdir)):
-            y, _ = io_read_audio(os.path.join(speakerdir, filename))
-            yA.append(y)
-
-        # Save all to dick
-        # uh oh ...
-        # print(np.asarray(yA).shape)
-        if savetype == 'npy':
-            os.system("mkdir -p npy")
-            np.save(os.path.join("npy", speaker), np.asarray(yA))
-        else:
-            print(savetype, "is not supported")
-            exit()
-
-    except Exception as e:
-        return False
-
-
-def io_read_speaker_data(datapath, speaker, savetype='npy'):
-    """
-    this function is used to read saved data (npy, npz, pkl, ...) of a speaker to a ndarray
-    if the path is not exist, which mean there is no saved data, read and create one.
-    :param alldatapath:
-    :param savetype:
-    :return:
-    """
-    path = os.path.join(savetype, speaker) + ".npy"
-    if savetype == 'npy':
-        if os.path.isfile(path):
-            return np.load(path)
-        else:
-            io_save_to_disk(datapath, speaker)
-            return np.load(path)
-    else:
-        print(savetype, "filetype is not supported yet")
-        exit()
-
-
 # This is wrong (as we need MCEP, not MFCC). Nevertheless, preserving this is necessary.
 # Updated 2018 Dec 14: Edit feat_mfccs to extract_features, with multiple choice of choosing feature to extract. Default is mcep
 # TODO feat argument need to be implement as a list, support multiple featuretype return
-def extract_features(audiodata, sr=16000, feat='mcep'):
+def extract_features(audiodata, speaker, sr=16000, feat='mcep'):
     """
     Feature extraction. For each type of feature, see corresponding case below
     Currently support: MCEP, MFCC. Will be updated when needed
@@ -120,6 +75,9 @@ def extract_features(audiodata, sr=16000, feat='mcep'):
     :param feat: type of currently supported feature
     :return:
     """
+    print("=======================")
+    logging.info("Extracting MCEP from {}'s data ...".format(speaker))
+
     if feat.lower() == 'mfcc':
         """
             extract mfcc from audio time series data (from librosa.load)
@@ -148,14 +106,29 @@ def extract_features(audiodata, sr=16000, feat='mcep'):
                 sourceframes *= pysptk.blackman(frameLength)
                 sourcemcepvectors = np.apply_along_axis(pysptk.mcep, 1, sourceframes, order, alpha)
         """
-        mceps = []
-        for audio in tqdm(audiodata[:3]):
-            frame = lbr.util.frame(audio, frame_length=frame_length, hop_length=hop_length).T
-            frame *= pysptk.blackman(frame_length)
+        # Check if data exists
+        temp_filename = os.path.join(feature_path, "{}_{}.pkl".format(speaker, feat))
 
-            mceps.append(np.apply_along_axis(pysptk.mcep, 1, frame, order=order, alpha=alpha).T)
+        if os.path.isfile(temp_filename):
+            logging.info("Found {}. Load data from {}_{}".format(temp_filename, speaker, feat))
 
-        return mceps, feat
+            with open(temp_filename, "rb") as f:
+                return pickle.load(f), feat
+        else:
+            mceps = []
+            logging.info("Calculating ...")
+
+            for audio in tqdm(audiodata):
+                frame = lbr.util.frame(audio, frame_length=frame_length, hop_length=hop_length).T
+                frame *= pysptk.blackman(frame_length)
+
+                mceps.append(np.apply_along_axis(pysptk.mcep, 1, frame, order=order, alpha=alpha).T)
+
+            # Save to .pkl for later load
+            with open(temp_filename, "wb") as f:
+                    pickle.dump(mceps, f, protocol=3)
+
+            return mceps, feat
     else:
         logging.critical('{} feature is not supported yet, exiting ...')
         exit()
@@ -173,7 +146,8 @@ def make_dict_from_feat(feat_A, feat_B):
     dtw_paths = []
 
     for i in range(len(feat_A)):
-        dist, cost, cum_cost, path = dtw(feat_A[i].T, feat_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
+        # dist, cost, cum_cost, path = dtw(feat_A[i].T, feat_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
+        dist, path = fastdtw(feat_A[i].T, feat_B[i].T, dist=lambda x, y: np.linalg.norm(x - y, ord=1))
         dtw_paths.append(path)
 
     exemplars = []
@@ -200,32 +174,53 @@ def _dtw_alignment(feat_A, feat_B):
     :param feat_B: shape of (162 audio file, ...)
     :return: dtw path of 162 file
     """
+
+    def foo(feat):
+        """
+        this function is made for multiprocessing
+        :param feat: feature for calculation
+        :return:
+        """
+
+    print("=======================")
+    logging.info("DTW on MCEP: Calculating warping function ...")
+
     dtw_paths = []
-
-    for i in range(len(feat_A)):
+    for i in tqdm(range(len(feat_A))):
         dist, cost, cum_cost, path = dtw(feat_A[i].T, feat_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
+        logging.info("Done {}/{}".format(i, len(feat_A)))
+
+        # dist, path = fastdtw(feat_A[i].T, feat_B[i].T, radius=5, dist=lambda x, y: np.linalg.norm(x - y, ord=1))
+        # dist, paths = warping_paths(np.array(feat_A[i].T), np.array(feat_B[i].T))  # , window=25, psi=2)
+        # best = best_path(paths)
+
         dtw_paths.append(path)
+        # dtw_paths.append(list(zip(*path)))
 
-    exemplars = []
-    full_A = []
-    full_B = []
-    for idx_file, path in tqdm(enumerate(dtw_paths)):
-        a = []
-        b = []
+    logging.info("Finish aligning. Warping mcep .... ")
 
-        for it in range(len(path[0])):
-            try:
-                a.append(feat_A[idx_file].T[path[0][it]])
-                b.append(feat_B[idx_file].T[path[1][it]])
-            except Exception as e:
-                input("Error occur. Press any key to exit ...")
-                exit()
+    return dtw_paths, None, None
 
-        full_A.append(np.asarray(a))
-        full_B.append(np.asarray(b))
-        # exemplars.append(np.stack([np.asarray(a), np.asarray(b)], axis=0))
-
-    return dtw_paths, full_A, full_B
+    # exemplars = []
+    # full_A = []
+    # full_B = []
+    # for idx_file, path in tqdm(enumerate(dtw_paths)):
+    #     a = []
+    #     b = []
+    #
+    #     for it in range(len(path[0])):
+    #         try:
+    #             a.append(feat_A[idx_file].T[path[0][it]])
+    #             b.append(feat_B[idx_file].T[path[1][it]])
+    #         except Exception as e:
+    #             input("Error occur. Press any key to exit ...")
+    #             exit()
+    #
+    #     full_A.append(np.asarray(a))
+    #     full_B.append(np.asarray(b))
+    #     # exemplars.append(np.stack([np.asarray(a), np.asarray(b)], axis=0))
+    #
+    # return dtw_paths, full_A, full_B
 
 
 def make_exemplar_dict_A(dtw_paths, feat_A):
@@ -247,7 +242,7 @@ def make_exemplar_dict_A(dtw_paths, feat_A):
 
 
 def make_exemplar_dict_W(dtw_paths):
-    return [path[0] for path in dtw_paths]
+    return [path[0] for path in dtw_paths], [path[1] for path in dtw_paths]
 
 
 def make_exemplar_dict_R(dtw_paths, feat_B):
@@ -276,7 +271,7 @@ def make_exemplar_dict_R(dtw_paths, feat_B):
 
     return R_exemplars_dict
 
-# End of 2018 Dev 17 editing
+# End of 2018 Dec 17 editing
 
 
 # EDIT: Add pickling exemplar dictionaries
@@ -294,6 +289,8 @@ def io_save_exemplar_dictionaries(exemplar_dict, protocol=3, savepath="data/vc/e
         with open(os.path.join(savepath, filename), "wb") as f:
             pickle.dump(value, f, protocol=protocol)
 
+    raise NotImplementedError
+
 
 def final_make_dict():
     # TODO should add argument to python call
@@ -303,30 +300,25 @@ def final_make_dict():
     speakerAdata = io_read_speaker_data(data_path, speakerA, savetype='npy')
     speakerBdata = io_read_speaker_data(data_path, speakerB, savetype='npy')
 
-    # Extract features from time-series
-    feat_A, feat_type_A = extract_features(speakerAdata, sr=sr, feat='mcep')
-    feat_B, feat_type_B = extract_features(speakerBdata, sr=sr, feat='mcep')
-
+    # Extract features from time-series FOR DTW-ALIGNMENT (f0, sp, ap is not included here)
+    feat_A, feat_type_A = extract_features(speakerAdata, speakerA, sr=sr, feat='mcep')
+    feat_B, feat_type_B = extract_features(speakerBdata, speakerB, sr=sr, feat='mcep')
     assert feat_type_A == feat_type_B, "Inconsistent feature type. 2 speaker must have the same type of extracted features."
 
     # Get dtw path. Note that feat_A and feat_B will be transposed to (n_frames, mel-cepstral order) shape
     dtw_paths, feat_A, feat_B = _dtw_alignment(feat_A, feat_B)
 
-    exemplar_A = make_exemplar_dict_A(dtw_paths, feat_A)
-    exemplar_R = make_exemplar_dict_R(dtw_paths, feat_B)
-    exemplar_W = make_exemplar_dict_W(dtw_paths)
-
-    print(type(exemplar_A), type(exemplar_R), type(exemplar_W))
-    print(exemplar_A[1].shape, exemplar_R[1].shape, exemplar_W[1].shape)
-    print(exemplar_R)
+    # exemplar_A = make_exemplar_dict_A(dtw_paths, feat_A)
+    # exemplar_R = make_exemplar_dict_R(dtw_paths, feat_B)
+    exemplar_W_A, exemplar_W_B = make_exemplar_dict_W(dtw_paths)
 
     io_save_exemplar_dictionaries({
-        'exemplar_A': exemplar_A,
-        'exemplar_R': exemplar_R,
-        'exemplar_W': exemplar_W
+        # 'exemplar_A': exemplar_A,
+        # 'exemplar_R': exemplar_R,
+        'exemplar_W_A': exemplar_W_A,
+        'exemplar_W_B': exemplar_W_B
     })
 
-    from pyworld import decode_spectral_envelope, code_spectral_envelope, 
     # exemplars = make_dict_from_feat(feat_A, feat_B)
     # print(exemplars[0].shape, exemplars[1].shape)
     #
