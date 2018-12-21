@@ -2,6 +2,10 @@
 
 ### Todo list
 
+- [ ] 01_make_dict_parallel.py
+    + [x] _extract_features: Extract mcep
+    + [ ] _dtw_alignment (this consume most of the time)
+
 - [ ] Documentation for important function
 - [ ] ...
 
