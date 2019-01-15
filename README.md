@@ -3,6 +3,7 @@
 ### Todo list
 
 - [ ] 01_make_dict_parallel.py
+    + [x] Done in utils.py. Add parameter `parallel` to `io_read_speaker_data`
     + [x] _extract_features: Extract mcep
     + [ ] _dtw_alignment (this consume most of the time)
 
@@ -14,6 +15,9 @@ Exemplar-based voice conversion
 ### 2. NN attempt for fw  
 ### 3. convert  
 ### 4. calculate some objective result
+
+## Update 2019 Jan 15:
+1. lambda declaration is replace (<del>lambda x, y: np.linalg.norm(x - y, ord=1)</del>) for distance function
 
 ## Update 2018 Dec 14:
 #### Big update: The old version seems to be wrong at first attempt: 
