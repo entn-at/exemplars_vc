@@ -204,7 +204,7 @@ def _factorize(X, W, beta_loss="kullback-leibler", tol=1e-4):
 
     beta_loss = "frobenius"
 
-    _W, _H, n_iter = non_negative_factorization(X=X, H=W, init="custom", update_H=False, n_components=W.shape[0], beta_loss=beta_loss, solver='mu', tol=tol,
+    _W, _H, n_iter = non_negative_factorization(X=X, H=W, init="custom", update_H=False, n_components=W.shape[0], beta_loss=beta_loss, solver='cd', tol=tol,
                                                 max_iter=200, verbose=1)
 
     return _W.T

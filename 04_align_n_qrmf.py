@@ -19,7 +19,6 @@ import os
 import sys
 import pdb
 import pickle
-from scipy import stats
 
 import time
 import logging
@@ -205,7 +204,7 @@ def _factorize(X, W, beta_loss="kullback-leibler", tol=1e-4):
     beta_loss = "frobenius"
 
     _W, _H, n_iter = non_negative_factorization(X=X, H=W, init="custom", update_H=False, n_components=W.shape[0], beta_loss=beta_loss, solver='mu', tol=tol,
-                                                max_iter=200, verbose=1)
+                                                max_iter=1000, verbose=1)
 
     return _W.T
 
@@ -248,7 +247,7 @@ def factorize(tobe_converted, src_feat):
             print("Calculating H_sp ...")
             H_sp = _factorize(X=conv_sp, W=A_sp)
             print("Calculating H_ap ...")
-            H_ap = _factorize(X=conv_ap, W=A_ap)
+            H_ap = _factorize(X=conv_ap, W=A_ap, tol=1e-6)
             print("Calculating H_f0 ...")
             H_f0 = _factorize(X=conv_f0, W=A_f0)
 
@@ -274,7 +273,7 @@ def factorize(tobe_converted, src_feat):
             A_stft = []
 
             for i in range(len(src_feat)):
-                A_stft.extend(src_feat[i]['stft'])
+                A_stft.extend(src_feat[i]['real'])
 
             A_stft = np.asarray(A_stft)
 
