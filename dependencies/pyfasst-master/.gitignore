@@ -1,0 +1,15 @@
+*~
+*.pyc
+*.svn
+*.so
+*.o
+*.npz
+*.wav
+.#*
+build
+dist
+pyfasst/SeparateLeadStereo/tracking/_tracking.cpp
+
+*.py#
+
+dummy.html

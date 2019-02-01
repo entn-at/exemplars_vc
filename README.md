@@ -16,8 +16,13 @@ Exemplar-based voice conversion
 ### 3. convert  
 ### 4. calculate some objective result
 
+## Update 2019 Jan 17:
+1. Switch to simpler version of exemplar-based method: implement non-compensation version first. Will release 1.0 before Feb
+    Source: - http://www.zhizheng.org/slides/SSW2013_poster_nmf.pdf
+            - Zhizheng Wu et al., Exemplar-based voice conversion using non-negative spectrogram deconvolution
+
 ## Update 2019 Jan 15:
-1. lambda declaration is replace (<del>lambda x, y: np.linalg.norm(x - y, ord=1)</del>) for distance function
+1. lambda declaration is replaced (<del>lambda x, y: np.linalg.norm(x - y, ord=1)</del>) for distance function
 
 ## Update 2018 Dec 14:
 #### Big update: The old version seems to be wrong at first attempt: 

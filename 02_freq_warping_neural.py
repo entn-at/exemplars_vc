@@ -8,7 +8,7 @@
 
 from __future__ import print_function
 
-from utils import config_get_config, io_read_data
+from utils import config_get_config, io_read_data, logdir
 from models import Net
 from tqdm import tqdm
 
@@ -116,31 +116,6 @@ def save_checkpoint(filename, model, state=None):
         }
 
         torch.save(_state, os.path.join('checkpoints/', filename))
-
-
-def logdir():
-    """
-    return an available name for tensorboard dir. The logdir will look like this
-    --- runs
-         |--1
-         |--2
-         |--3
-         |--4
-        To this case, "5" will be returned. Even with the case
-    :return:
-    """
-    listdir = [xx for xx in os.listdir("runs/") if os.path.isdir(os.path.join("runs", xx))]
-
-    max_ = 0
-    for i in range(len(listdir)):
-        try:
-            filename = int(listdir[i])
-            if max_ < filename:
-                max_ = filename
-        except ValueError:
-            continue
-
-    return str(max_ + 1)
 
 
 def train(data_train, data_test):

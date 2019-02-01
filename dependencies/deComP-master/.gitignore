@@ -1,0 +1,57 @@
+*.py[cod]
+__pycache__
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+.cache
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# PyCharm and Vim
+.idea
+*.swp
+.DS_Store
+
+# setuptool specific
+doc/_build
+doc/generated
+
+.ipynb_checkpoints
+
+# dropbox related things
+.dropbox.attr
+
+# analysis folder
+analysis
+
+# benchmark folder
+.benchmarks

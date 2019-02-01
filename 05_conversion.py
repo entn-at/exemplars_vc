@@ -44,6 +44,32 @@ speakerA = args['SpeakerA']
 speakerB = args['SpeakerB']
 
 
+def _get_conversion_data(audiodatum, fs, refine_f0):
+    """
+        Note: this is file-based implementation for multiprocessing. Different from non-parallel version
+    Get A (without warping source dictionary) feature for conversion (sp, ap, f0)
+    :param audiodatum: 1 file audio data. not all 162
+    :param args:
+    :param kwargs:
+    :return: source dictionary (without warping)
+    """
+    # Extract feature
+    _f0, t = pw.dio(audiodatum, fs)  # raw pitch extractor
+
+    if refine_f0:
+        f0 = pw.stonemask(audiodatum, _f0, t, fs)  # pitch refinement
+    else:
+        f0 = _f0
+
+    sp = pw.cheaptrick(audiodatum, f0, t, fs)  # extract smoothed spectrogram
+    ap = pw.d4c(audiodatum, f0, t, fs)  # extract aperiodicity
+    # y = pw.synthesize(f0, sp, ap, fs)
+
+    features = {'sp': sp, 'ap': ap, 'f0': f0, 'fs': fs, 'sr': fs}
+
+    return features
+
+
 def io_load_from_pickle(speaker):
     pickle_path = os.path.join(feature_path, "exem_dict")
     with open(os.path.join(pickle_path, "{}_feat_sp_ap_f0.pkl".format(speaker)), "rb") as f:

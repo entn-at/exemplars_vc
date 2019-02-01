@@ -5,3 +5,5 @@
 # Project files
 /checkpoints/
 /runs/
+/data/
+/npy/

@@ -9,7 +9,7 @@ src = SF1
 tar = TM3
 sr = 16000
 feature_path = data/vc
-use_stft = 0
+use_stft = 1
 
 [NET]
 bidirectional = False
@@ -29,7 +29,7 @@ patience = 30
 
 # Mel-cepstral coefficient
 [MCEP]
-feat_frameLength = 512
+feat_frameLength = 400
 feat_overlap = 0.3125
 # feat_hop_length = frameLength * overlap
 feat_hop_length = 80
@@ -39,10 +39,10 @@ feat_gamma = -0.35
 
 # Spectral envelope
 [PYWORLD]
-frame_period = 1024
+frame_period = 1024                                                                 
 f0_is_refined = True
 f0_floor = 40
 
 [MISC]
 cpu_rate = 0.6
-nb_file = 10
+nb_file = 20

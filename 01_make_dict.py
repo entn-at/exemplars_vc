@@ -3,7 +3,7 @@
 """ Created on 9:21 AM 11/30/18
     @author: ngunhuconchocon
     @brief: This script is made to construct frame-wise dictionary between src and tar spectra
-    For short, it create dicts of exemplars ( a_i, b_i pairs)
+    For short, it create dicts of exemplars (a_i, b_i pairs)
 """
 
 from __future__ import print_function
@@ -126,7 +126,7 @@ def extract_features(audiodata, speaker, sr=16000, feat='mcep'):
 
             # Save to .pkl for later load
             with open(temp_filename, "wb") as f:
-                    pickle.dump(mceps, f, protocol=3)
+                pickle.dump(mceps, f, protocol=3)
 
             return mceps, feat
     else:

@@ -1,21 +1,451 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/04_align_n_nmf.py" line="172" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="296b77d6-4ff6-48e3-9ef6-2349c938f530" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/zz_test_griffin_lim.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/%(asctime)s.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/01_make_dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/01_make_dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_make_dict_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/01_make_dict_parallel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/02_freq_warping_AMF.py" beforeDir="false" afterPath="$PROJECT_DIR$/02_freq_warping_AMF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/02_freq_warping_DFW.py" beforeDir="false" afterPath="$PROJECT_DIR$/02_freq_warping_DFW.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/02_freq_warping_neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/02_freq_warping_neural.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/02_test_freq_warping_neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/02_test_freq_warping_neural.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/03_a_b_r.py" beforeDir="false" afterPath="$PROJECT_DIR$/03_a_b_r.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_a_b_r_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/03_a_b_r_parallel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04_align_n_nmf.py" beforeDir="false" afterPath="$PROJECT_DIR$/04_align_n_nmf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04_align_n_qrmf.py" beforeDir="false" afterPath="$PROJECT_DIR$/04_align_n_qrmf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_conversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/05_conversion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/checkpoints_from_servers/check_model_weight.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/checkpoints_from_servers/pull_from_server.sh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config" beforeDir="false" afterPath="$PROJECT_DIR$/config/config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100009.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100010.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100011.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100012.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100013.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100014.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100015.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100016.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100017.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100018.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100019.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100020.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100021.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100022.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100023.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100024.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100025.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100026.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100027.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100028.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100029.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100030.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100031.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100032.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100033.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100034.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100035.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100036.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100037.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100038.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100039.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100040.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100041.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100042.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100043.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100044.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100045.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100046.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100047.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100048.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100049.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100050.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100051.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100052.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100053.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100054.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100055.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100056.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100057.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100058.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100059.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100060.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100061.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100062.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100063.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100064.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100065.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100066.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100067.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100068.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100069.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100070.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100071.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100072.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100073.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100074.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100075.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100076.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100077.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100078.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100079.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100080.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100081.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100082.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100083.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100084.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100085.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100086.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100087.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100088.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100089.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100090.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100091.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100092.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100093.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100094.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100095.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100096.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100097.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100098.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100099.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100100.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100101.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100102.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100103.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100104.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100105.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100106.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100107.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100108.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100109.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100110.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100111.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100112.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100113.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100114.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100115.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100116.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100117.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100118.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100119.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100120.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100121.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100122.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100123.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100124.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100125.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100126.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100127.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100128.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100129.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100130.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100131.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100132.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100133.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100134.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100135.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100136.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100137.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100138.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100139.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100140.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100141.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100142.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100143.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100144.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100145.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100146.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100147.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100148.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100149.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100150.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100151.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100152.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100153.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100154.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100155.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100156.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100157.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100158.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100159.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100160.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100161.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SF1/100162.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100009.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100010.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100011.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100012.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100013.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100014.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100015.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100016.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100017.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100018.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100019.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100020.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100021.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100022.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100023.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100024.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100025.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100026.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100027.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100028.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100029.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100030.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100031.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100032.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100033.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100034.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100035.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100036.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100037.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100038.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100039.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100040.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100041.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100042.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100043.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100044.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100045.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100046.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100047.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100048.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100049.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100050.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100051.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100052.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100053.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100054.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100055.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100056.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100057.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100058.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100059.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100060.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100061.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100062.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100063.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100064.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100065.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100066.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100067.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100068.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100069.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100070.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100071.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100072.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100073.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100074.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100075.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100076.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100077.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100078.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100079.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100080.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100081.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100082.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100083.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100084.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100085.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100086.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100087.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100088.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100089.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100090.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100091.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100092.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100093.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100094.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100095.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100096.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100097.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100098.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100099.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100100.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100101.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100102.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100103.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100104.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100105.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100106.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100107.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100108.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100109.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100110.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100111.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100112.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100113.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100114.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100115.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100116.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100117.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100118.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100119.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100120.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100121.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100122.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100123.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100124.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100125.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100126.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100127.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100128.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100129.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100130.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100131.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100132.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100133.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100134.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100135.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100136.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100137.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100138.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100139.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100140.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100141.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100142.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100143.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100144.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100145.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100146.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100147.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100148.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100149.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100150.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100151.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100152.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100153.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100154.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100155.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100156.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100157.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100158.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100159.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100160.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100161.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/TF1/100162.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vc/SF12TF1_mfcc.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vc/SF12TF1_mfcc.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vc/SF12TF1_mfcc_25ms_10ms.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/vc/SF12TF1_mfcc_25ms_10ms_norm_axis0.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/demo_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pull_from_server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/pull_from_server.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/push_to_server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/push_to_server.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zz_linhtinhxamlon/01_test_rnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/zz_linhtinhxamlon/01_test_rnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-07 16:21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 08:56" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:08" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:36" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:46" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:50" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:51" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:54" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 09:55" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:32" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:42" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:43" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:46" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:51" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 10:59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:00" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:19" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:24" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:25" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:26" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 11:41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:44" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:45" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:46" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:47" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:50" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:55" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 16:56" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:14" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:16" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:36" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:40" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:42" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-10 17:44" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-11 17:34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 08:36" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 08:37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 08:38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 08:45" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 08:50" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:07" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:08" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:25" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:36" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:40" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:58" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 09:59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:00" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:09" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:16" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:18" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:23" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:24" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:26" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:40" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 10:41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 14:09" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 14:10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 14:15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/2018-12-12 14:21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/npy/SF1.npy" beforeDir="false" afterPath="$PROJECT_DIR$/npy/SF1.npy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npy/TF1.npy" beforeDir="false" afterPath="$PROJECT_DIR$/npy/TF1.npy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zz_linhtinh.py" beforeDir="false" afterPath="$PROJECT_DIR$/zz_linhtinh.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,97 +455,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/01_make_dict.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/04_align_n_nmf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="642">
-              <caret line="113" column="18" selection-start-line="112" selection-start-column="7" selection-end-line="113" selection-end-column="18" />
+            <state relative-caret-position="5400">
+              <caret line="320" column="54" selection-start-line="320" selection-start-column="54" selection-end-line="320" selection-end-column="54" />
+              <folding>
+                <element signature="e#139#176#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/01_make_dict_parallel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5904">
+              <caret line="357" column="34" selection-start-line="357" selection-start-column="34" selection-end-line="357" selection-end-column="34" />
               <folding>
                 <element signature="e#248#285#0" expanded="true" />
-                <marker date="1544439696449" expanded="true" signature="3955:5232" ph="..." />
-                <marker date="1544439696449" expanded="true" signature="5191:5232" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/02_freq_warping_neural.py">
+        <entry file="file://$PROJECT_DIR$/03_a_b_r_parallel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="100" column="92" selection-start-line="100" selection-start-column="92" selection-end-line="100" selection-end-column="92" />
+            <state relative-caret-position="1422">
+              <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
               <folding>
-                <element signature="e#315#352#0" expanded="true" />
+                <element signature="e#466#503#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/nn/modules/loss.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/zz_test_griffin_lim.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1206">
-              <caret line="73" column="8" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
+            <state relative-caret-position="432">
+              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models.py">
+        <entry file="file://$PROJECT_DIR$/zz_audio_utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1746">
-              <caret line="97" column="100" selection-start-line="97" selection-start-column="100" selection-end-line="97" selection-end-column="100" />
-              <folding>
-                <element signature="e#103#140#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/nn/modules/module.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8190">
-              <caret line="462" selection-start-line="462" selection-end-line="462" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/config">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/push_to_server.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pull_from_server.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="87" selection-start-column="87" selection-end-column="87" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/02_test_freq_warping_neural.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1872">
-              <caret line="125" column="49" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
-              <folding>
-                <element signature="e#103#140#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="4950">
+              <caret line="286" selection-start-line="286" selection-end-line="286" />
             </state>
           </provider>
         </entry>
@@ -123,11 +512,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+            <state relative-caret-position="1926">
+              <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
               <folding>
                 <element signature="e#102#139#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/config">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nmf_tool/nmf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/04_align_n_nmf_pytorch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7002">
+              <caret line="407" selection-start-line="407" selection-end-line="407" />
             </state>
           </provider>
         </entry>
@@ -137,48 +553,58 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="kinhph_nn_torch" />
+        <option value="Setup Script" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>F.tanh</find>
-      <find>in</find>
-      <find>input</find>
-      <find>deprecate</find>
-      <find>deprecated</find>
-      <find>rnn</find>
-      <find>tanh</find>
-      <find>histo</find>
-      <find>mfcc</find>
-      <find>\[[0-9]</find>
-      <find>\[[0-9\:]</find>
-      <find>logging.in</find>
-      <find>color</find>
-      <find>logger</find>
-      <find>pritn</find>
-      <find>batch</find>
-      <find>bidirectional + 1</find>
-      <find>(bi)</find>
-      <find>* bi</find>
-      <find>shape</find>
-      <find>logd</find>
-      <find>check_mo</find>
-      <find>pkl</find>
+      <find>fft_size</find>
+      <find>frame_</find>
+      <find>tobe_converted_path</find>
+      <find>['SP']</find>
+      <find>SF1</find>
+      <find>data_path</find>
+      <find>sf1</find>
+      <find>frame_period</find>
+      <find>nmf</find>
       <find>print</find>
-      <find>log</find>
-      <find>check</find>
-      <find>checkpoint_and_write_save_dir</find>
-      <find>net</find>
-      <find>seed</find>
-      <find>h_state</find>
+      <find>print\n +</find>
+      <find>initialization</find>
+      <find>learning</find>
+      <find>&gt;&gt;&gt;</find>
+      <find>H['H_sp']</find>
+      <find>max</find>
+      <find>tqdm</find>
+      <find>20</find>
+      <find>Out</find>
+      <find>sp_ap_f0</find>
+      <find>feat</find>
+      <find>mcep</find>
+      <find>mfcc</find>
+      <find>n</find>
+      <find>harvest</find>
+      <find>frame</find>
+      <find>sp_</find>
+      <find>starmap</find>
+      <find>core</find>
+      <find>stft</find>
     </findStrings>
     <replaceStrings>
       <replace>info</replace>
       <replace>bi</replace>
       <replace>* self.bi</replace>
+      <replace>feat_A</replace>
+      <replace>feat_B</replace>
+      <replace>']</replace>
+      <replace>audiodatum</replace>
+      <replace>cpu_rate</replace>
+      <replace>aligned_src_feat</replace>
+      <replace>fs=sr</replace>
+      <replace>B_</replace>
+      <replace>print(</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -198,23 +624,41 @@
         <option value="$PROJECT_DIR$/checkpoints/checkpoints_from_servers/pull_from_server.sh" />
         <option value="$PROJECT_DIR$/checkpoints/checkpoints_from_servers/check_model_weight.py" />
         <option value="$PROJECT_DIR$/sequence_models_tutorial.py" />
-        <option value="$PROJECT_DIR$/config/config" />
-        <option value="$PROJECT_DIR$/01_make_dict.py" />
-        <option value="$PROJECT_DIR$/demo_graph.py" />
         <option value="$PROJECT_DIR$/pull_from_server.sh" />
-        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/02_test_freq_warping_neural.py" />
-        <option value="$PROJECT_DIR$/03_a_b_r.py" />
-        <option value="$PROJECT_DIR$/02_freq_warping_neural.py" />
         <option value="$PROJECT_DIR$/models.py" />
+        <option value="$PROJECT_DIR$/old_code/utils.py" />
+        <option value="$PROJECT_DIR$/02_freq_warping_AMF.py" />
+        <option value="$PROJECT_DIR$/02_freq_warping_neural.py" />
+        <option value="$PROJECT_DIR$/02_freq_warping_DFW.py" />
+        <option value="$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-26487350/pyworld/pyworld.py" />
+        <option value="$PROJECT_DIR$/03_a_b_r.py" />
+        <option value="$PROJECT_DIR$/01_make_dict.py" />
+        <option value="$PROJECT_DIR$/zz_linhtinhxamlon/zz_linhtinh.py" />
+        <option value="$PROJECT_DIR$/04_conversion.py" />
+        <option value="$PROJECT_DIR$/04_compensation.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/data/vc/linhtinh.py" />
+        <option value="$PROJECT_DIR$/../../../kinhph/workspace/pyGenLab/genlab/word_splitter_into_subword/splitter.py" />
+        <option value="$PROJECT_DIR$/../../../kinhph/workspace/pyGenLab/genlab/word_splitter_into_subword/splitter_bak.py" />
+        <option value="$PROJECT_DIR$/04_align_n_qrmf.py" />
+        <option value="$PROJECT_DIR$/demo_graph.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
+        <option value="$PROJECT_DIR$/nmf.py" />
+        <option value="$PROJECT_DIR$/01_make_dict_parallel.py" />
+        <option value="$PROJECT_DIR$/zz_linhtinh.py" />
+        <option value="$PROJECT_DIR$/zz_test_griffin_lim.py" />
+        <option value="$PROJECT_DIR$/config/config" />
+        <option value="$PROJECT_DIR$/03_a_b_r_parallel.py" />
+        <option value="$PROJECT_DIR$/04_align_n_nmf.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="161" />
+    <option name="x" value="960" />
     <option name="y" value="24" />
-    <option name="width" value="1600" />
-    <option name="height" value="1085" />
+    <option name="width" value="960" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -232,11 +676,6 @@
             <path>
               <item name="exemplar_vc" type="b2602c69:ProjectViewProjectNode" />
               <item name="exemplar_vc" type="462c0819:PsiDirectoryNode" />
-              <item name="checkpoints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="exemplar_vc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="exemplar_vc" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -247,12 +686,6 @@
               <item name="exemplar_vc" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="&lt; Python 3.6 &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="exemplar_vc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -265,8 +698,13 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nmf_tool" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/dependencies" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -281,8 +719,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.02_freq_warping_neural">
-    <configuration name="01_make_dict" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.04_compensation">
+    <configuration name="01_make_dict_parallel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="exemplar_vc" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -294,7 +732,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/01_make_dict.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/01_make_dict_parallel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -303,7 +741,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="02_freq_warping_neural" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="03_a_b_r_parallel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="exemplar_vc" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -315,7 +753,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/02_freq_warping_neural.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/03_a_b_r_parallel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -324,7 +762,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="02_test_freq_warping_neural" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="04_compensation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="exemplar_vc" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/bin/python3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/04_align_n_nmf.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="zz_linhtinh" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="exemplar_vc" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -336,7 +795,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/02_test_freq_warping_neural.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zz_linhtinh.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -345,7 +804,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="03_a_b_r" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="zz_test_griffin_lim" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="exemplar_vc" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -357,7 +816,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/03_a_b_r.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zz_test_griffin_lim.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -366,34 +825,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="sequence_models_tutorial" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="exemplar_vc" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sequence_models_tutorial.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+    <list>
+      <item itemvalue="Python.01_make_dict_parallel" />
+      <item itemvalue="Python.03_a_b_r_parallel" />
+      <item itemvalue="Python.04_compensation" />
+      <item itemvalue="Python.zz_linhtinh" />
+      <item itemvalue="Python.zz_test_griffin_lim" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.02_freq_warping_neural" />
-        <item itemvalue="Python.03_a_b_r" />
-        <item itemvalue="Python.01_make_dict" />
-        <item itemvalue="Python.02_test_freq_warping_neural" />
-        <item itemvalue="Python.sequence_models_tutorial" />
+        <item itemvalue="Python.04_compensation" />
+        <item itemvalue="Python.03_a_b_r_parallel" />
+        <item itemvalue="Python.zz_test_griffin_lim" />
+        <item itemvalue="Python.01_make_dict_parallel" />
+        <item itemvalue="Python.zz_linhtinh" />
       </list>
     </recent_temporary>
   </component>
@@ -410,46 +855,81 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1922" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2641012" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48953974" visible="true" weight="0.24512388" />
+      <window_info id="Structure" order="1" sideWeight="0.51046026" side_tool="true" visible="true" weight="0.24512388" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.743806" weight="0.32392895" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.829204" weight="0.5809822" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32832617" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5925145" weight="0.30230126" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6220348" weight="0.375523" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49920928" visible="true" weight="0.2633229" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007907" side_tool="true" weight="0.29885057" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49815497" weight="0.32845187" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32845187" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.3779652" side_tool="true" weight="0.56437767" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49182922" weight="0.38912135" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49973643" weight="0.31171548" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/01_make_dict.py</url>
-          <line>194</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/01_make_dict.py</url>
-          <line>102</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/01_make_dict.py</url>
-          <line>127</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/zz_linhtinhxamlon/01_test_rnn.py</url>
           <line>20</line>
@@ -482,121 +962,453 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/02_freq_warping_neural.py</url>
-          <line>192</line>
+          <line>167</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/02_freq_warping_AMF.py</url>
+          <line>75</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/02_freq_warping_AMF.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/02_freq_warping_AMF.py</url>
+          <line>72</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/01_make_dict.py</url>
+          <line>231</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/03_a_b_r.py</url>
+          <line>145</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/01_make_dict.py</url>
+          <line>193</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/01_make_dict_parallel.py</url>
+          <line>364</line>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/01_make_dict.py</url>
+          <line>299</line>
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils.py</url>
+          <line>143</line>
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils.py</url>
+          <line>189</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/05_conversion.py</url>
+          <line>79</line>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/demo_graph.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/01_make_dict_parallel.py</url>
+          <line>244</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils.py</url>
+          <line>100</line>
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/04_align_n_qrmf.py</url>
+          <line>392</line>
+          <option name="timeStamp" value="166" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/zz_linhtinh.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/04_align_n_nmf.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/04_align_n_nmf.py</url>
+          <line>374</line>
+          <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/04_align_n_nmf.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/zz_test_griffin_lim.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="178" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/03_a_b_r_parallel.py</url>
+          <line>201</line>
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="args" language="Python" />
-        <watch expression="data_test[i][0]" language="Python" />
-        <watch expression="x.view(len(x), 1, -1)" language="Python" />
+        <watch expression="[src_W[ii][-1] for ii in range(len(src_W))]" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>data_test[i][0]</expression-string>
+        <expression-string>[src_W[ii][-1] for ii in range(len(src_W))]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>x.view(len(x), 1, -1)</expression-string>
+        <expression-string>src_W[:][-1]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>data_test[i]</expression-string>
+        <expression-string>residual['r_sp'].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>newest_dir.decode(&quot;utf8&quot;)</expression-string>
+        <expression-string>residual['r_sp']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>args</expression-string>
+        <expression-string>np.log(np.matmul(H_sp.T, residual['r_sp'])).shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.array(data)</expression-string>
+        <expression-string>residual</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.array(data).flatten()</expression-string>
+        <expression-string>np.log(np.matmul(H_sp.T, residual)).shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>freq_warp</expression-string>
+        <expression-string>np.log(np.matmul(H_sp.T, B_sp)).shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>n.scopeName()</expression-string>
+        <expression-string>np.log(np.matmul(H_sp.T, B_sp))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>n.scopename()</expression-string>
+        <expression-string>np.log(np.matmul(H_sp.T, B_sp))+ np.log(np.matmul(H_sp.T, residual))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/02_freq_warping_DFW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+          <folding>
+            <element signature="e#138#175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/02_freq_warping_AMF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+          <folding>
+            <element signature="e#103#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/02_freq_warping_neural.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="72" column="53" selection-start-line="72" selection-start-column="53" selection-end-line="72" selection-end-column="53" />
+          <folding>
+            <element signature="e#315#352#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/fastdtw/fastdtw.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="132" column="4" selection-start-line="132" selection-start-column="4" selection-end-line="132" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/dtaidistance/dtw.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1288">
+          <caret line="271" selection-start-line="271" selection-end-line="271" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/03_a_b_r.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-520">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <marker date="1545214736017" expanded="true" signature="1570:3364" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/multiprocessing/pool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="844">
+          <caret line="267" column="8" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/01_make_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+          <folding>
+            <marker date="1547431187444" expanded="true" signature="6113:7944" ph="..." />
+            <marker date="1547431187444" expanded="true" signature="6379:6521" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-26487350/numpy/core/multiarray.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="115" column="4" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/core/numeric.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="491" selection-start-line="491" selection-end-line="491" />
+        <state relative-caret-position="396">
+          <caret line="491" column="14" lean-forward="true" selection-start-line="491" selection-start-column="14" selection-end-line="491" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/linalg/linalg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="2137" column="59" selection-start-line="2137" selection-start-column="59" selection-end-line="2137" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-26487350/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="5214" column="41" lean-forward="true" selection-start-line="5214" selection-start-column="41" selection-end-line="5214" selection-end-column="41" />
+        <state relative-caret-position="182">
+          <caret line="528" column="4" selection-start-line="528" selection-start-column="4" selection-end-line="528" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torchsummary/__init__.py">
+    <entry file="file://$PROJECT_DIR$/zz_linhtinhxamlon/01_test_rnn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#103#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="1778" column="4" selection-start-line="1778" selection-start-column="4" selection-end-line="1778" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/dtw.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="107" selection-start-line="28" selection-start-column="107" selection-end-line="28" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/05_conversion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1404">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/core/shape_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-680">
+          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-26487350/pyworld/pyworld.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="324" column="4" selection-start-line="324" selection-start-column="4" selection-end-line="324" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dependencies/deComP-master/decomp/utils/cp_compat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29970">
+          <caret line="1665" selection-start-line="1665" selection-end-line="1665" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/logging/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34146">
+          <caret line="1899" selection-start-line="1899" selection-end-line="1899" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/librosa/core/spectrum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="241" selection-start-line="241" selection-end-line="241" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/04_align_n_qrmf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6120">
+          <caret line="359" column="58" selection-start-line="359" selection-start-column="58" selection-end-line="359" selection-end-column="58" />
+          <folding>
+            <element signature="e#287#324#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1638">
+          <caret line="97" column="8" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="8" />
+          <folding>
+            <element signature="e#103#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/sklearn/decomposition/dict_learning.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16596">
+          <caret line="942" column="41" selection-start-line="942" selection-start-column="41" selection-end-line="942" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/vc/linhtinh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/configparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17118">
+          <caret line="959" selection-start-line="959" selection-end-line="959" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PyMF-0.3-py3.6.egg!/pymf/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PyMF-0.3-py3.6.egg!/pymf/nmf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="303" column="75" selection-start-line="303" selection-start-column="75" selection-end-line="303" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PyMF-0.3-py3.6.egg!/pymf/cnmf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="66" column="8" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PyMF-0.3-py3.6.egg!/pymf/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="173" column="8" selection-start-line="173" selection-start-column="8" selection-end-line="173" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torchnmf/metrics.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="33" lean-forward="true" selection-start-column="26" selection-end-column="33" />
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README" />
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/tensor.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torchnmf/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="111" column="40" selection-start-line="111" selection-start-column="33" selection-end-line="111" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torchsummary/torchsummary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
-          <caret line="58" column="24" lean-forward="true" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/onnx/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/onnx/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="152" column="4" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="4" />
+        <state relative-caret-position="503">
+          <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -607,217 +1419,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/nn/functional.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/sklearn/decomposition/nmf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="824" column="81" selection-start-line="824" selection-start-column="71" selection-end-line="824" selection-end-column="81" />
+        <state relative-caret-position="18630">
+          <caret line="1051" selection-start-line="1051" selection-end-line="1051" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-26487350/torch/_C/__init__.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/pysptk/sptk.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="6006" column="4" selection-start-line="6006" selection-start-column="4" selection-end-line="6006" selection-end-column="4" />
+        <state relative-caret-position="309">
+          <caret line="408" column="4" selection-start-line="408" selection-start-column="4" selection-end-line="408" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/checkpoints/checkpoints_from_servers/pull_from_server.sh" />
-    <entry file="file://$PROJECT_DIR$/checkpoints/checkpoints_from_servers/check_model_weight.py" />
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/logging/__init__.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/librosa/feature/spectral.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-237">
-          <caret line="1737" column="4" selection-start-line="1737" selection-start-column="4" selection-end-line="1737" selection-end-column="4" />
+        <state relative-caret-position="182">
+          <caret line="1320" column="4" selection-start-line="1320" selection-start-column="4" selection-end-line="1320" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/coloredlogs/__init__.py">
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-26487350/pyworld/pyworld.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="317" column="4" selection-start-line="317" selection-start-column="4" selection-end-line="317" selection-end-column="4" />
+        <state relative-caret-position="324">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/%(asctime)s.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zz_linhtinhxamlon/01_test_rnn.py">
+    <entry file="file://$PROJECT_DIR$/zz_linhtinh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="468">
+          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
           <folding>
             <element signature="e#103#140#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sequence_models_tutorial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="170" selection-start-line="170" selection-end-line="171" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/nn/modules/rnn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/sklearn/model_selection/_split.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34200">
-          <caret line="1919" column="4" selection-start-line="1919" selection-start-column="4" selection-end-line="1919" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4788">
-          <caret line="266" selection-start-line="266" selection-end-line="266" />
+        <state relative-caret-position="217">
+          <caret line="310" selection-start-line="310" selection-end-line="310" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/importlib/__init__.py">
+    <entry file="file://$PROJECT_DIR$/04_align_n_nmf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1908">
-          <caret line="107" column="4" selection-start-line="107" selection-start-column="4" selection-end-line="107" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/tensorboardX/writer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9000">
-          <caret line="520" selection-start-line="520" selection-end-line="520" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/tensorboardX/pytorch_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demo_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        <state relative-caret-position="5400">
+          <caret line="320" column="54" selection-start-line="320" selection-start-column="54" selection-end-line="320" selection-end-column="54" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#139#176#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/serialization.py">
+    <entry file="file://$PROJECT_DIR$/01_make_dict_parallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="511" selection-start-line="511" selection-end-line="511" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="1665" selection-start-line="1665" selection-end-line="1665" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/03_a_b_r.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="76" column="30" selection-start-line="76" selection-start-column="30" selection-end-line="76" selection-end-column="30" />
+        <state relative-caret-position="5904">
+          <caret line="357" column="34" selection-start-line="357" selection-start-column="34" selection-end-line="357" selection-end-column="34" />
           <folding>
-            <element signature="e#505#542#0" expanded="true" />
-            <marker date="1544598601976" expanded="true" signature="1282:1493" ph="..." />
+            <element signature="e#248#285#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/nn/modules/loss.py">
+    <entry file="file://$PROJECT_DIR$/03_a_b_r_parallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1206">
-          <caret line="73" column="8" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8190">
-          <caret line="462" selection-start-line="462" selection-end-line="462" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/push_to_server.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pull_from_server.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="87" selection-start-column="87" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/02_test_freq_warping_neural.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="125" column="49" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
+        <state relative-caret-position="1422">
+          <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
           <folding>
-            <element signature="e#103#140#0" expanded="true" />
+            <element signature="e#466#503#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zz_audio_utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4950">
+          <caret line="286" selection-start-line="286" selection-end-line="286" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+        <state relative-caret-position="1926">
+          <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
           <folding>
             <element signature="e#102#139#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
+    <entry file="file://$PROJECT_DIR$/config/config">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1746">
-          <caret line="97" column="100" selection-start-line="97" selection-start-column="100" selection-end-line="97" selection-end-column="100" />
-          <folding>
-            <element signature="e#103#140#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/02_freq_warping_neural.py">
+    <entry file="file://$PROJECT_DIR$/nmf_tool/nmf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="100" column="92" selection-start-line="100" selection-start-column="92" selection-end-line="100" selection-end-column="92" />
-          <folding>
-            <element signature="e#315#352#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="504">
+          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/01_make_dict.py">
+    <entry file="file://$PROJECT_DIR$/04_align_n_nmf_pytorch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="642">
-          <caret line="113" column="18" selection-start-line="112" selection-start-column="7" selection-end-line="113" selection-end-column="18" />
-          <folding>
-            <element signature="e#248#285#0" expanded="true" />
-            <marker date="1544439696449" expanded="true" signature="3955:5232" ph="..." />
-            <marker date="1544439696449" expanded="true" signature="5191:5232" ph="..." />
-          </folding>
+        <state relative-caret-position="7002">
+          <caret line="407" selection-start-line="407" selection-end-line="407" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zz_test_griffin_lim.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
         </state>
       </provider>
     </entry>

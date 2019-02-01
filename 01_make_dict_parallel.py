@@ -24,6 +24,7 @@ from fastdtw import fastdtw
 # from dtaidistance.dtw import distance_fast, best_path, best_path2, warping_paths
 from librosa import display
 
+import pyworld as pw
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -67,7 +68,14 @@ speakerB = args['SpeakerB']
 feature_path = args['feature_path']
 sr = int(args['sampling_rate'])
 
+f0_floor = int(args['f0_floor'])
+
 cpu_rate = float(args['cpu_rate'])
+nb_file = int(args['nb_file'])
+
+# frame_length = pw.get_cheaptrick_fft_size(sr, f0_floor)
+# frame_length = pw.get_cheaptrick_fft_size(sr, f0_floor)
+
 logging.info("{}% cpu resources ({} cores) will be used to run this script".format(cpu_rate * 100, int(cpu_rate * cpu_count())))
 logging.info("START EXTRACTING ...")
 
@@ -89,7 +97,8 @@ def _extract_features(audiodatum, speaker, sr=16000, feat='mcep'):
         """
             extract mfcc from audio time series data (from librosa.load)
         """
-        mfcc = lbr.util.normalize(lbr.feature.mfcc(audiodatum, sr=sr, n_fft=frame_length, hop_length=hop_length), norm=1, axis=0)
+        # mfcc = lbr.util.normalize(lbr.feature.mfcc(audiodatum, sr=sr, n_fft=frame_length, hop_length=hop_length), norm=1, axis=0)
+        mfcc = lbr.feature.mfcc(audiodatum, sr=sr, n_fft=frame_length, hop_length=hop_length)
 
         # return np.stack(mfccs)
         return mfcc
@@ -211,7 +220,6 @@ def _dtw_alignment(feat_A, feat_B):
     :param feat_B: 1 audio file, with shape of (mel order, n_frames) (Note: not 162, this is function for parallel)
     :return: dtw path of 1 file
     """
-    # print("=======================")
     logging.info("DTW on MCEP: Calculating warping function ...")
 
     # dist, cost, cum_cost, path = dtw(feat_A.T, feat_B.T, lambda x, y: np.linalg.norm(x - y, ord=1))
@@ -222,28 +230,14 @@ def _dtw_alignment(feat_A, feat_B):
 
 def dtw_alignment(feat_full_A, feat_full_B):
     """
-        This will use multiprocess.Pool to parallel call _extract_features
+        This will use multiprocess.Pool to parallel call _dtw_alignment
 
     Calculate dtw_path, for constructing exemplar dictionaries (see make_exemplar_dict_A, R, W)
     :param feat_A: shape of (162 audio file, ...)
     :param feat_B: shape of (162 audio file, ...)
     :return: dtw path of 162 file
     """
-
-    # print("=======================")
     logging.info("Parallel: DTW on MCEP: Calculating warping function ...")
-
-    # dtw_paths = []
-    # for i in tqdm(range(len(feat_full_A))):
-    #     dist, cost, cum_cost, path = dtw(feat_full_A[i].T, feat_full_B[i].T, lambda x, y: np.linalg.norm(x - y, ord=1))
-    #     logging.info("Done {}/{}".format(i, len(feat_full_A)))
-    #
-    #     dist, path = fastdtw(feat_A[i].T, feat_B[i].T, radius=5, dist=lambda x, y: np.linalg.norm(x - y, ord=1))
-    #     dist, paths = warping_paths(np.array(feat_A[i].T), np.array(feat_B[i].T))  # , window=25, psi=2)
-    #     best = best_path(paths)
-    #
-    #     dtw_paths.append(path)
-    #     dtw_paths.append(list(zip(*path)))
 
     # For parallel
     n_workers = int(cpu_rate * cpu_count())
@@ -353,14 +347,16 @@ def final_make_dict():
     # Read audio time-series from npy
     logging.info("===================================================")
     logging.info("Start reading audio time-series ...")
-    speakerAdata = io_read_speaker_data(data_path, speakerA, savetype='npy', parallel=True)[:8]
-    speakerBdata = io_read_speaker_data(data_path, speakerB, savetype='npy')[:8]
+    speakerAdata = io_read_speaker_data(data_path, speakerA, savetype='npy', parallel=True)[:nb_file]
+    speakerBdata = io_read_speaker_data(data_path, speakerB, savetype='npy')[:nb_file]
 
     # Extract features from time-series FOR DTW-ALIGNMENT (f0, sp, ap is not included here)
     logging.info("===================================================")
     logging.info("Start extracting mel feature for dtw alignment ...")
-    feat_A, feat_type_A = extract_features(speakerAdata, speakerA, sr=sr, feat='mcep')
-    feat_B, feat_type_B = extract_features(speakerBdata, speakerB, sr=sr, feat='mcep')
+    # feat_A, feat_type_A = extract_features(speakerAdata, speakerA, sr=sr, feat='mcep')
+    # feat_B, feat_type_B = extract_features(speakerBdata, speakerB, sr=sr, feat='mcep')
+    feat_A, feat_type_A = extract_features(speakerAdata, speakerA, sr=sr, feat='mfcc')
+    feat_B, feat_type_B = extract_features(speakerBdata, speakerB, sr=sr, feat='mfcc')
     assert feat_type_A == feat_type_B, "Inconsistent feature type. 2 speaker must have the same type of extracted features."
 
     # Get dtw path. Note that feat_A and feat_B will be transposed to (n_frames, mel-cepstral order) shape

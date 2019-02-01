@@ -10,6 +10,7 @@ from dtw import dtw
 from tqdm import tqdm
 from sklearn.decomposition import NMF, non_negative_factorization
 from utils import config_get_config
+from scipy import stats
 
 import numpy as np
 import pyworld as pw
@@ -19,11 +20,12 @@ import os
 import sys
 import pdb
 import pickle
-from scipy import stats
 
 import time
 import logging
 import datetime
+
+from zz_audio_utilities import reconstruct_signal_griffin_lim
 
 logging.basicConfig(
     filename="logs/" + ":".join(str(datetime.datetime.now()).split(":")[:-1]),
@@ -57,6 +59,7 @@ refine_f0 = args['is_refined']
 cpu_rate = float(args['cpu_rate'])
 
 use_stft = args['use_stft']
+nb_file = args['nb_file']
 
 
 def io_load_from_pickle():
@@ -166,7 +169,7 @@ def align_sp_ap_f0(feat=None, dtw_path=None):
         return aligned_src_feat, aligned_tar_feat
 
 
-def synthesize1(f0, sp, ap, fs, filename=str(datetime.datetime.now()).replace(" ", "_")):
+def synthesize1(f0, sp, ap, fs, filename="sp_ap_f0_" + str(datetime.datetime.now()).replace(" ", "_")):
     # SP AP F0
     # y = pw.synthesize(aligned_src_feat[0]['f0'], aligned_src_feat[0]['sp'], aligned_src_feat[0]['ap'], aligned_src_feat[0]['fs'])
     os.system("mkdir -p wav")
@@ -176,12 +179,14 @@ def synthesize1(f0, sp, ap, fs, filename=str(datetime.datetime.now()).replace(" 
     logging.info("Done synthesizing. Output is saved at wav/sp_ap_f0_{}.wav".format(filename))
 
 
-def synthesize2(stft, fs, filename=str(datetime.datetime.now()).replace(" ", "_")):
+def synthesize2(stft_mag, fs, filename=str(datetime.datetime.now()).replace(" ", "_")):
     # ISTFT
     # y = pw.synthesize(aligned_src_feat[0]['f0'], aligned_src_feat[0]['sp'], aligned_src_feat[0]['ap'], aligned_src_feat[0]['fs'])
     os.system("mkdir -p wav")
-
-    y = lbr.core.istft(stft_matrix=stft, hop_length=hop_length, window=window)
+    
+    y = reconstruct_signal_griffin_lim(np.abs(stft_mag), frame_length, hop_length, 300)
+    # y = lbr.core.istft(stft_matrix=stft, hop_length=hop_length, window=window)
+    
     lbr.output.write_wav("wav/{}.wav".format(filename), y, sr=fs)
     logging.info("Done synthesizing. Output is saved at wav/stft_{}.wav".format(filename))
 
@@ -205,7 +210,7 @@ def _factorize(X, W, beta_loss="kullback-leibler", tol=1e-4):
     beta_loss = "frobenius"
 
     _W, _H, n_iter = non_negative_factorization(X=X, H=W, init="custom", update_H=False, n_components=W.shape[0], beta_loss=beta_loss, solver='mu', tol=tol,
-                                                max_iter=200, verbose=1)
+                                                max_iter=150, verbose=1)
 
     return _W.T
 
@@ -221,29 +226,59 @@ def factorize(tobe_converted, src_feat):
             Note of note: X^T=H^T W^T. sklearn NMF decompose X = WH, but can fix H only (use precomputed H)
     :return:
     """
+
+    def init_A_exemplar(tobe_converted, src_feat):
+        conv_sp, conv_ap, conv_f0 = tobe_converted['sp'], tobe_converted['ap'], tobe_converted['f0'][:, np.newaxis]
+
+        A_sp = []  # np.asarray([src_feat[i]['sp'] for i in range(len(src_feat))])
+        A_ap = []  # np.asarray([src_feat[i]['ap'] for i in range(len(src_feat))])
+        A_f0 = []  # np.asarray([src_feat[i]['f0'] for i in range(len(src_feat))])
+
+        for i in range(len(src_feat)):
+            A_sp.extend(src_feat[i]['sp'])
+            A_ap.extend(src_feat[i]['ap'])
+            A_f0.extend(src_feat[i]['f0'])
+
+        A_sp = np.asarray(A_sp)
+        A_ap = np.asarray(A_ap)
+        A_f0 = np.asarray(A_f0)[:, np.newaxis]
+
+        return A_sp, A_ap, A_f0, conv_sp, conv_ap, conv_f0
+
     logging.info("Start calculating the activation matrix H ...")
 
     if not use_stft:
         if os.path.isfile("data/vc/exem_dict/{}_{}.pkl".format("H_test_sp_ap_f0", len(src_feat))):
             logging.info("Found a precomputed H at {}_{}.pkl. Loading ...".format("H_test_sp_ap_f0", len(src_feat)))
             with open("data/vc/exem_dict/{}_{}.pkl".format("H_test_sp_ap_f0", len(src_feat)), "rb") as f:
-                return pickle.load(f)
+                # return pickle.load(f)
+                H = pickle.load(f)
+
+            if os.path.isfile("data/vc/exem_dict/{}_{}.pkl".format("R_test_sp_ap_f0", len(src_feat))):
+                logging.info("Found a precomputed R at {}_{}.pkl. Loading ...".format("R_test_sp_ap_f0", len(src_feat)))
+                with open("data/vc/exem_dict/{}_{}.pkl".format("R_test_sp_ap_f0", len(src_feat)), "rb") as f:
+                    R = pickle.load(f)
+            else:
+                # R is not exist. Calculate R from H and src_feat:
+                #   log r_n = log y_n - log y_hat_n\
+                logging.info("Calculating residual compensation R ...")
+
+                A_sp, A_ap, A_f0, conv_sp, conv_ap, conv_f0 = init_A_exemplar(tobe_converted, src_feat)
+
+                src_hat_sp_residual = np.log(np.matmul(A_sp, H['H_sp']) - conv_sp)
+                src_hat_ap_residual = np.log(np.matmul(A_ap, H['H_ap']) - conv_ap)
+                src_hat_f0_residual = np.log(np.matmul(A_f0, H['H_f0']) - conv_f0)
+
+                R = {'r_sp': src_hat_sp_residual, 'r_ap': src_hat_ap_residual, 'r_f0': src_hat_f0_residual}
+                with open("data/vc/exem_dict/{}_{}.pkl".format("R_test_sp_ap_f0", len(src_feat)), "wb") as f:
+                    pickle.dump(R, f)
+
+            return H, R
         else:
             logging.info("Calculating H with sp ap f0 feature ...")
-            conv_sp, conv_ap, conv_f0 = tobe_converted['sp'], tobe_converted['ap'], tobe_converted['f0'][:, np.newaxis]
+            # conv_sp, conv_ap, conv_f0 = tobe_converted['sp'], tobe_converted['ap'], tobe_converted['f0'][:, np.newaxis]
 
-            A_sp = []  # np.asarray([src_feat[i]['sp'] for i in range(len(src_feat))])
-            A_ap = []  # np.asarray([src_feat[i]['ap'] for i in range(len(src_feat))])
-            A_f0 = []  # np.asarray([src_feat[i]['f0'] for i in range(len(src_feat))])
-
-            for i in range(len(src_feat)):
-                A_sp.extend(src_feat[i]['sp'])
-                A_ap.extend(src_feat[i]['ap'])
-                A_f0.extend(src_feat[i]['f0'])
-
-            A_sp = np.asarray(A_sp)
-            A_ap = np.asarray(A_ap)
-            A_f0 = np.asarray(A_f0)[:, np.newaxis]
+            A_sp, A_ap, A_f0, conv_sp, conv_ap, conv_f0 = init_A_exemplar(tobe_converted, src_feat)
 
             print("Calculating H_sp ...")
             H_sp = _factorize(X=conv_sp, W=A_sp)
@@ -254,27 +289,36 @@ def factorize(tobe_converted, src_feat):
 
             H = {'H_sp': H_sp, 'H_ap': H_ap, 'H_f0': H_f0}
 
+            src_hat_sp_residual = np.log(np.matmul(H['H_sp'].T, A_sp) - conv_sp)
+            src_hat_ap_residual = np.log(np.matmul(H['H_ap'].T, A_ap) - conv_ap)
+            src_hat_f0_residual = np.log(np.matmul(H['H_f0'].T, A_f0) - conv_f0)
+
             with open("data/vc/exem_dict/{}_{}.pkl".format("H_test_sp_ap_f0", len(src_feat)), "wb") as f:
                 pickle.dump(H, f)
 
-            return H
+            R = {'r_sp': src_hat_sp_residual, 'r_ap': src_hat_ap_residual, 'r_f0': src_hat_f0_residual}
+            with open("data/vc/exem_dict/{}_{}.pkl".format("R_test_sp_ap_f0", len(src_feat)), "wb") as f:
+                pickle.dump(R, f)
+
+            return H, R
     else:
         if os.path.isfile("data/vc/exem_dict/{}_{}.pkl".format("H_test_stft", len(src_feat))):
             logging.info("Found a precomputed H at {}_{}.pkl. Loading ...".format("H_test_stft", len(src_feat)))
             with open("data/vc/exem_dict/{}_{}.pkl".format("H_test_stft", len(src_feat)), "rb") as f:
-                return pickle.load(f)
+                return pickle.load(f), None
         else:
             logging.info("Calculating H with stft feature ...")
 
             # EDIT 2019 Jan 22: within this block of code, `['stft']` will be changed to `['real']`: convert only the real part,
             # since sklearn NMF doesn't support NMF for complex-value matrix. For testing the feasibility.
             # conv_stft = tobe_converted['stft']
-            conv_stft = tobe_converted['real']
+            conv_stft = np.abs(tobe_converted['real'])
 
             A_stft = []
 
             for i in range(len(src_feat)):
-                A_stft.extend(src_feat[i]['stft'])
+                # A_stft.extend(src_feat[i]['stft'])
+                A_stft.extend(np.abs(src_feat[i]['real']))
 
             A_stft = np.asarray(A_stft)
 
@@ -286,45 +330,67 @@ def factorize(tobe_converted, src_feat):
             with open("data/vc/exem_dict/{}_{}.pkl".format("H_test_stft", len(src_feat)), "wb") as f:
                 pickle.dump(H, f)
 
-            return H
+            return H, None
 
 
-def convert(H, tar_feat):
+def convert(H, tar_feat, residual):
     # TODO MAI VIET DOC
     """
         From H and aligned_target_features (target exemplars), we calculate converted feature
     :param H: Activation matrix
     :param tar_feat: aligned target features
+    :param residual:
     :return: converted feature, type `dict`
     """
     logging.info("Using H for conversion ...")
 
-    H_sp, H_ap, H_f0 = H['H_sp'], H['H_ap'], H['H_f0']
+    if not use_stft:
+        H_sp, H_ap, H_f0 = H['H_sp'], H['H_ap'], H['H_f0']
 
-    B_sp = []  # np.asarray([src_feat[i]['sp'] for i in range(len(src_feat))])
-    B_ap = []  # np.asarray([src_feat[i]['ap'] for i in range(len(src_feat))])
-    B_f0 = []  # np.asarray([src_feat[i]['f0'] for i in range(len(src_feat))])
+        B_sp = []  # np.asarray([src_feat[i]['sp'] for i in range(len(src_feat))])
+        B_ap = []  # np.asarray([src_feat[i]['ap'] for i in range(len(src_feat))])
+        B_f0 = []  # np.asarray([src_feat[i]['f0'] for i in range(len(src_feat))])
 
-    for i in range(len(tar_feat)):
-        B_sp.extend(tar_feat[i]['sp'])
-        B_ap.extend(tar_feat[i]['ap'])
-        B_f0.extend(tar_feat[i]['f0'])
+        for i in range(len(tar_feat)):
+            B_sp.extend(tar_feat[i]['sp'])
+            B_ap.extend(tar_feat[i]['ap'])
+            B_f0.extend(tar_feat[i]['f0'])
 
-    B_sp = np.asarray(B_sp)
-    B_ap = np.asarray(B_ap)
-    B_f0 = np.asarray(B_f0)[:, np.newaxis]
+        B_sp = np.asarray(B_sp)
+        B_ap = np.asarray(B_ap)
+        B_f0 = np.asarray(B_f0)[:, np.newaxis]
 
-    converted_sp = np.matmul(H_sp.T, B_sp)
-    converted_ap = np.matmul(H_ap.T, B_ap)
-    converted_f0 = np.matmul(H_f0.T, B_f0)
+        # converted_sp = np.matmul(H_sp.T, B_sp)
+        # converted_ap = np.matmul(H_ap.T, B_ap)
+        # converted_f0 = np.matmul(H_f0.T, B_f0)
 
-    converted_feature = {
-        'sp': converted_sp,
-        'ap': converted_ap,
-        'f0': np.squeeze(converted_f0)
-    }
+        residual['r_sp'][np.isnan(residual['r_sp'])] = 0
+        residual['r_ap'][np.isnan(residual['r_ap'])] = 0
+        residual['r_f0'][np.isnan(residual['r_f0'])] = 0
 
-    return converted_feature
+        converted_sp = np.exp(np.log(np.matmul(H_sp.T, B_sp)) + np.log(residual['r_sp']))
+        converted_ap = np.exp(np.log(np.matmul(H_ap.T, B_ap)) + np.log(residual['r_ap']))
+        converted_f0 = np.exp(np.log(np.matmul(H_f0.T, B_f0)) + np.log(residual['r_f0']))
+
+        converted_feature = {
+            'sp': converted_sp,
+            'ap': converted_ap,
+            'f0': np.squeeze(converted_f0)
+        }
+
+        return converted_feature
+    else:
+        H_stft = H['H_stft']
+
+        B_stft = []
+        
+        for i in range(len(tar_feat)):
+            B_stft.extend(np.abs(tar_feat[i]['real']))
+
+        B_stft = np.asarray(B_stft)
+        converted_stft_mag = np.matmul(H_stft.T, B_stft)
+
+        return converted_stft_mag
 
 
 def extract_feature_for_conversion(wavpath):
@@ -378,18 +444,20 @@ if __name__ == "__main__":
 
     # TODO change `align_sp_ap_f0` to `align_feature`: stft also included
     aligned_src_feat, aligned_tar_feat = align_sp_ap_f0()
+    aligned_src_feat = aligned_src_feat[:nb_file]
+    aligned_tar_feat = aligned_tar_feat[:nb_file]
     assert len(aligned_tar_feat) == len(aligned_src_feat)
 
     # TODO parallel
     # TODO no complex number support. Temporarily use source's imaginary part. Will take care of this issue later
     logging.info("====================")
     logging.info("Start conversion phase ...")
-    H = factorize(tobe_converted_features, aligned_src_feat)
+    H, R = factorize(tobe_converted_features, aligned_src_feat)
 
     #
     logging.info("====================")
     logging.info("Converting using exemplar and H ...")
-    converted = convert(H, aligned_tar_feat)
+    converted = convert(H, aligned_tar_feat, residual=R)
 
     logging.info("====================")
     logging.info("Synthesizing speech from converted features ...")
@@ -397,7 +465,7 @@ if __name__ == "__main__":
     if not use_stft:
         synthesize1(converted['f0'], converted['sp'], converted['ap'], fs=sr)
     else:
-        synthesize2(converted['stft'], fs=sr)
+        synthesize2(converted, fs=sr)
 
     print("Elapsed time: {}".format(time.time() - start))
 # Сою́з Сове́тских Социалисти́ческих Респу́блик

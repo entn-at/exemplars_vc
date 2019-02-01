@@ -27,7 +27,7 @@ import subprocess
 
 import sys
 import pickle
-
+import numpy as np
 import torch
 import torch.optim as optim
 import torch.nn as nn
@@ -66,6 +66,9 @@ f0_floor = args['f0_floor']
 
 cpu_rate = float(args['cpu_rate'])
 nb_file = int(args['nb_file'])
+use_stft = args['use_stft']
+
+logging.info("{}% cpu resources ({} cores) will be used to run this script".format(cpu_rate * 100, int(cpu_rate * cpu_count())))
 
 
 def _get_conversion_data(audiodatum, fs, refine_f0, f0_floor, use_stft):
@@ -77,6 +80,7 @@ def _get_conversion_data(audiodatum, fs, refine_f0, f0_floor, use_stft):
     :param kwargs:
     :return: source dictionary (without warping)
     """
+
     # Extract feature
     # _f0, t = pw.dio(audiodatum, fs)  # raw pitch extractor
     if not use_stft:
@@ -196,11 +200,11 @@ if __name__ == "__main__":
 
     # Get data for conversion
     logging.info("===================================================")
-    logging.info("Extracting features for exemplar dictionaries: sp, ap, f0 ...")
+    # logging.info("Extracting features for exemplar dictionaries: sp, ap, f0 ...")
     # A = get_conversion_data(speakerAdata, fs=sr, refine_f0=refine_f0, f0_floor=f0_floor, speaker=speakerA)
     # B = get_conversion_data(speakerBdata, fs=sr, refine_f0=refine_f0, f0_floor=f0_floor, speaker=speakerB)
-    A = get_conversion_data(speakerAdata, fs=sr, refine_f0=refine_f0, f0_floor=f0_floor, speaker=speakerA, use_stft=True)
-    B = get_conversion_data(speakerBdata, fs=sr, refine_f0=refine_f0, f0_floor=f0_floor, speaker=speakerB, use_stft=True)
+    A = get_conversion_data(speakerAdata, fs=sr, refine_f0=refine_f0, f0_floor=f0_floor, speaker=speakerA, use_stft=use_stft)
+    B = get_conversion_data(speakerBdata, fs=sr, refine_f0=refine_f0, f0_floor=f0_floor, speaker=speakerB, use_stft=use_stft)
 
     print(len(A), len(B))
     # with open(os.path.join("data/vc/exem_dict", filename + "_A"), "rb") as f:

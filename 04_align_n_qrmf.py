@@ -3,12 +3,15 @@
 """ Created on 2:19 PM 1/14/19
     @author: ngunhuconchocon
     @brief: Пролетарии всех стран, соединяйтесь!
+            Instead of NMF, using QRMF
+            https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.linalg.qr.html#scipy.linalg.qr
 """
 
 from __future__ import print_function
 from dtw import dtw
 from tqdm import tqdm
 from sklearn.decomposition import NMF, non_negative_factorization
+from sklearn import decomposition
 from utils import config_get_config
 
 import numpy as np
@@ -19,6 +22,7 @@ import os
 import sys
 import pdb
 import pickle
+import scipy
 
 import time
 import logging
@@ -201,10 +205,13 @@ def _factorize(X, W, beta_loss="kullback-leibler", tol=1e-4):
     # Note: This statement should be true, but the input of this function is (n_samples, n_features), so we don't need to transpose (X.T). See their shapes for better understand
     # _W, _H, n_iter = non_negative_factorization(X=X.T, H=W.T, init="custom", update_H=False, n_components=W.T.shape[1], beta_loss=beta_loss, solver='mu')
 
-    beta_loss = "frobenius"
+    # beta_loss = "frobenius"
 
-    _W, _H, n_iter = non_negative_factorization(X=X, H=W, init="custom", update_H=False, n_components=W.shape[0], beta_loss=beta_loss, solver='mu', tol=tol,
-                                                max_iter=1000, verbose=1)
+    # _W, _H, n_iter = non_negative_factorization(X=X, H=W, init="custom", update_H=False, n_components=W.shape[0], beta_loss=beta_loss, solver='mu', tol=tol,
+    #                                             max_iter=1000, verbose=1)
+
+
+    scipy.linalg.qr(X, mode=)
 
     return _W.T
 
